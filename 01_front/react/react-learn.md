@@ -102,6 +102,7 @@ dispatcherの役割
 
 Reducerの役割
 
+- 元々は、２つの値を取り１つの値を返す関数という意味
 - Actionの内容を判断し、Stateを変更する
 
 ```ts
