@@ -23,8 +23,9 @@ jobs:
       # branch名称からファイル名称を取得する
       - name: Extract File Name
         id: extract_branch
-        run: echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
-        run: echo ${GITHUB_REF#refs/heads/}
+        run: |-
+          echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
+          echo ${GITHUB_REF#refs/heads/}
 
       # おまじない及びjson操作コマンドのインストール
       - name: Set Up Linux Command
