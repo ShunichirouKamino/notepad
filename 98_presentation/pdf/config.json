@@ -1,4 +1,4 @@
 {
-    "directory": "test",
+    "directory": "./pdf/output",
     "output_format": "pdf"
 }
