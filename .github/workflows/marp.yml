@@ -28,7 +28,7 @@ jobs:
         run: |-
           echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
           echo ${GITHUB_REF#refs/heads/}
-          echo "${GITHUB_REF#refs/heads/}.md" | sed -e "$BRANCH_BASE//g"
+          echo ${GITHUB_REF#refs/heads/} | sed -e "${BRANCH_BASE}//g"
 
       # おまじない及びjson操作コマンドのインストール
       - name: Set Up Linux Command
@@ -49,10 +49,10 @@ jobs:
       # MarpからPDFへのビルド
       - name: Build Marp to PDF
         run: |-
-          echo "input-file : ${{ steps.config.outputs.DIR }}/slide.md"
+          echo "input-file : ${PDF_DIR}/slide.md"
           echo "output-format : ${{ steps.config.outputs.DIR }}"
-          docker run --rm -u root --init -v $PWD:/home/marp/app/ \
-            -e LANG=$LANG marpteam/marp-cli $PDF_DIR/slide.md \
+          docker run --rm --init -v ${PWD}:/home/marp/app/ \
+            -e LANG=$LANG marpteam/marp-cli ${PDF_DIR}/slide.md \
             --${{ steps.config.outputs.FORMAT }} \
             -o ${{ steps.config.outputs.DIR }}.${{ steps.config.outputs.FORMAT }} \
 
