@@ -5,6 +5,7 @@ on:
     branches:
       # create-pdfブランチへのプッシュ時にアーティファクト作成
       - create-pdf
+      - main
 
 env:
   PDF_CONFIG_FILE: ./98_presentation/pdf/config.json
@@ -39,7 +40,7 @@ jobs:
 
       # アーティファクトの作成及びアップロード
       - name: Upload Artifact
-      　uses: actions/upload-artifact@v2
-        with:
-          name: output_slide
-          path: ${{steps.config.outputs.DIR}}.${{steps.config.outputs.FORMAT}}
+        #uses: actions/upload-artifact@v2
+        #with:
+        #name: output_slide
+        #path: ${{steps.config.outputs.DIR}}.${{steps.config.outputs.FORMAT}}
