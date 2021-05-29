@@ -17,8 +17,6 @@ jobs:
 
     steps:
       # stepsへのID付与
-      - id: config
-
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -31,12 +29,13 @@ jobs:
 
       # config.jsonから設定値を読み取り後続処理に渡す
       - name: Extraction Config
+        id: config
         run: |-
           directory=$(cat $PDF_CONFIG_FILE | jq -r .directory)
           output_format=$(cat $PDF_CONFIG_FILE | jq -r .output_format)
           echo "::set-output name=DIR::${directory}"
           echo "::set-output name=FORMAT::${output_format}"
-      - run: |-
+        run: |-
           docker run --rm -u root --init -v "$(pwd):/home/marp/app/" \
             -e LANG=$LANG marpteam/marp-cli ${{steps.config.outputs.DIR}}/slide.md \
             --${{steps.config.outputs.FORMAT}} \
