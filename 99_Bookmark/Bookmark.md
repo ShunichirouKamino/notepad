@@ -35,7 +35,7 @@
 - [GitHub Actions ワークフローコマンド](https://docs.github.com/ja/actions/reference/workflow-commands-for-github-actions)
   - 後続ステップに値を渡したい際に`set-output`コマンドを利用
     - `echo "::set-output name=NAME::VALUE"`にて後続に渡す値を指定
-    - set-output が属する steps には、必ず任意の id ブロックとして、`id: ANY`を指定
+    - set-output が属するブロックには、必ず任意の id 要素として、`id: ANY`を指定
     - 利用する際は、`${{ steps.ANY.outputs.NAME }}`にて`VALUE`を取り出すことが可能
 
 # Other

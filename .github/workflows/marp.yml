@@ -28,7 +28,8 @@ jobs:
         run: |-
           echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
           echo ${GITHUB_REF#refs/heads/}
-          echo ${GITHUB_REF#refs/heads/} | sed -e "${BRANCH_BASE}//g"
+          test=(echo ${GITHUB_REF#refs/heads/} | sed -e "${BRANCH_BASE}//g")
+          echo test
 
       # おまじない及びjson操作コマンドのインストール
       - name: Set Up Linux Command
@@ -45,6 +46,11 @@ jobs:
           output_format=$(cat $PDF_CONFIG_FILE | jq -r .output_format)
           echo "::set-output name=DIR::${directory}"
           echo "::set-output name=FORMAT::${output_format}"
+
+      # PDF関連フォルダのパーミッションの変更
+      - name: Change Permission
+        run: |-
+          chmod -R 775 ${PDF_DIR}/
 
       # MarpからPDFへのビルド
       - name: Build Marp to PDF
