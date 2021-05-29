@@ -28,8 +28,7 @@ jobs:
         run: |-
           echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
           echo ${GITHUB_REF#refs/heads/}
-          test=(echo ${GITHUB_REF#refs/heads/} | sed -e "${BRANCH_BASE}//g")
-          echo test
+          echo ${GITHUB_REF#refs/heads/} | sed -e "s/${BRANCH_BASE}//g")
 
       # おまじない及びjson操作コマンドのインストール
       - name: Set Up Linux Command
