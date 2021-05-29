@@ -35,6 +35,8 @@ jobs:
           output_format=$(cat $PDF_CONFIG_FILE | jq -r .output_format)
           echo "::set-output name=DIR::${directory}"
           echo "::set-output name=FORMAT::${output_format}"
+
+      - name: Build Marp to PDF
         run: |-
           docker run --rm -u root --init -v "$(pwd):/home/marp/app/" \
             -e LANG=$LANG marpteam/marp-cli ${{steps.config.outputs.DIR}}/slide.md \
