@@ -1,0 +1,34 @@
+name: marp-GitHub-actions
+
+on:
+  push:
+    branches:
+    # create-pdfブランチへのプッシュ時にアーティファクト作成
+      - create-pdf
+
+env:
+  PDF_CONFIG_FILE: ./98_presentation/pdf/config.json
+  
+jobs:
+  marp-to-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # おまじない及びjson操作コマンドのインストール
+      - run: sudo apt-get update & \
+             sudo apt-get upgrade & \
+             sudo apt-get install jq
+      - run: |
+          directory=$(cat $PDF_CONFIG_FILE | jq -r .directory)
+          output_format=$(cat config.json | jq -r .output_format)
+          echo "::set-output name=DIR::${directory}"
+          echo "::set-output name=FORMAT::${output_format}"
+        id: config
+      - run: docker run --rm -u root --init -v "$(pwd):/home/marp/app/" 
+              -e LANG=$LANG marpteam/marp-cli ${{steps.config.outputs.DIR}}/slide.md 
+              --${{steps.config.outputs.FORMAT}} 
+              -o ${{steps.config.outputs.DIR}}.${{steps.config.outputs.FORMAT}}
+      - uses: actions/upload-artifact@v2
+        with:
+          name: output_slide
+          path: ${{steps.config.outputs.DIR}}.${{steps.config.outputs.FORMAT}}
