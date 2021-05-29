@@ -31,17 +31,18 @@ jobs:
       - name: Extraction Config
         id: config
         run: |-
-          cat $PDF_CONFIG_FILE
           directory=$(cat $PDF_CONFIG_FILE | jq -r .directory)
+          echo ${directory}
           output_format=$(cat $PDF_CONFIG_FILE | jq -r .output_format)
+          echo ${output_format}
           echo "::set-output name=DIR::${directory}"
           echo "::set-output name=FORMAT::${output_format}"
 
       # MarpからPDFへのビルド
       - name: Build Marp to PDF
         run: |-
-          echo "output-dir : ${{steps.config.outputs.DIR}}"
-          echo "output-format : ${{steps.config.outputs.DIR}}"
+          echo "output-dir : ${{ steps.config.outputs.DIR }}"
+          echo "output-format : ${{ steps.config.outputs.DIR }}"
           docker run --rm -u root --init -v $PWD:/home/marp/app/ \
             -e LANG=$LANG marpteam/marp-cli ${{steps.config.outputs.DIR}}/slide.md \
             --${{steps.config.outputs.FORMAT}} \
