@@ -9,6 +9,8 @@ on:
 
 env:
   PDF_CONFIG_FILE: ./98_presentation/pdf/config.json
+  PDF_DIR: ./98_presentation/pdf
+  BRANCH_BASE: create-pdf/
 
 jobs:
   marp-to-pdf:
@@ -26,6 +28,7 @@ jobs:
         run: |-
           echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
           echo ${GITHUB_REF#refs/heads/}
+          echo "${GITHUB_REF#refs/heads/}.md" | sed -e "$BRANCH_BASE//g"
 
       # おまじない及びjson操作コマンドのインストール
       - name: Set Up Linux Command
@@ -49,7 +52,7 @@ jobs:
           echo "input-file : ${{ steps.config.outputs.DIR }}/slide.md"
           echo "output-format : ${{ steps.config.outputs.DIR }}"
           docker run --rm -u root --init -v $PWD:/home/marp/app/ \
-            -e LANG=$LANG marpteam/marp-cli ${{ steps.config.outputs.DIR }}/slide.md \
+            -e LANG=$LANG marpteam/marp-cli $PDF_DIR/slide.md \
             --${{ steps.config.outputs.FORMAT }} \
             -o ${{ steps.config.outputs.DIR }}.${{ steps.config.outputs.FORMAT }} \
 
