@@ -53,9 +53,9 @@ jobs:
       # MarpからPDFへのビルド
       - name: Build Marp to PDF
         run: |-
-          echo "input-file : ${PDF_DIR}/slide.md"
+          echo ${PDF_DIR}
           echo "output-format : ${{ steps.config.outputs.DIR }}"
-          docker run --rm --init -v ${PWD}:/home/marp/app/ \
+          docker run -u "node" --rm --init -v ${PWD}:/home/marp/app/ \
             -e LANG=$LANG marpteam/marp-cli ${PDF_DIR}/slide.md \
             --${{ steps.config.outputs.FORMAT }} \
             -o ${{ steps.config.outputs.DIR }}.${{ steps.config.outputs.FORMAT }} \
