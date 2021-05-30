@@ -53,12 +53,12 @@ jobs:
       # MarpからPDFへのビルド
       - name: Build Marp to PDF
         run: |-
-          echo ${PDF_DIR}
+          echo $PDF_DIR
+          echo $PWD
           echo "output-format : ${{ steps.config.outputs.DIR }}"
-          docker run -u "node" --rm --init -v ${PWD}:/home/marp/app/ \
-            -e LANG=$LANG marpteam/marp-cli ${PDF_DIR}/slide.md \
-            --${{ steps.config.outputs.FORMAT }} \
-            -o ${{ steps.config.outputs.DIR }}.${{ steps.config.outputs.FORMAT }} \
+          docker run -u "node" --rm --init -v $PWD:/home/marp/app/ \
+            -e LANG=$LANG marpteam/marp-cli slide.md \
+            --${{ steps.config.outputs.FORMAT }}
 
       # アーティファクトの作成及びアップロード
       #- name: Upload Artifact
