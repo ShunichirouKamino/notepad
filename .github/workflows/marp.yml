@@ -55,7 +55,7 @@ jobs:
         run: |-
           echo $PDF_DIR
           echo $PWD
-          docker run --rm --init -v $PWD:/home/marp/app/ \
+          docker run --rm --init -v $PWD/$PDF_DIR:/home/marp/app/ \
             -e LANG=$LANG marpteam/marp-cli $PDF_DIR/slide.md \
             --${{ steps.config.outputs.FORMAT }}
 
