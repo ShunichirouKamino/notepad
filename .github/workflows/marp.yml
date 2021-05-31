@@ -60,8 +60,8 @@ jobs:
             --${{ steps.config.outputs.FORMAT }}
 
       # アーティファクトの作成及びアップロード
-      #- name: Upload Artifact
-      #uses: actions/upload-artifact@v2
-      #with:
-      #name: output_slide
-      #path: ${{steps.config.outputs.DIR}}.${{steps.config.outputs.FORMAT}}
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: output_slide
+          path: ${{steps.config.outputs.DIR}}.${{steps.config.outputs.FORMAT}}
