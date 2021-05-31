@@ -57,6 +57,7 @@ jobs:
           docker run --rm -u root --init -v $PWD:/home/marp/app/ \
             -e LANG=$LANG marpteam/marp-cli slide.md \
             -o slide.${{steps.config.outputs.FORMAT}}
+          ls -lR
 
       # アーティファクトの作成及びアップロード
       - name: Upload Artifact
