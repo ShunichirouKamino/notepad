@@ -60,6 +60,7 @@ jobs:
             -o slide.${{steps.config.outputs.FORMAT}}
           echo "::set-output name=FILE::${PWD}/${PDF_DIR}/slide.${{steps.config.outputs.FORMAT}}"
           ls -lR
+          pwd
 
       # アーティファクトの作成及びアップロード
       - name: Upload Artifact
