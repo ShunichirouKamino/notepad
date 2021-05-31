@@ -64,4 +64,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: output_slide
-          path: ${PDF_DIR}/slide.${{steps.config.outputs.FORMAT}}
+          path: slide.${{steps.config.outputs.FORMAT}}
