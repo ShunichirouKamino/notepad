@@ -48,16 +48,14 @@ jobs:
       # PDF関連フォルダのパーミッションの変更
       - name: Change Permission
         run: |-
-          chmod -R 775 ${PDF_DIR}/
+          chmod -R 777 ${PDF_DIR}/
 
       # MarpからPDFへのビルド
       - name: Build Marp to PDF
         run: |-
-          echo $PDF_DIR
-          echo $PWD
-          echo ${PWD}/${PDF_DIR}
+          cd ${PDF_DIR}
           ls -lR
-          sudo docker run --rm -u root --init -v ${PWD}/${PDF_DIR}:/home/marp/app/ \
+          docker run --rm -u root --init -v $PWD:/home/marp/app/ \
             -e LANG=$LANG marpteam/marp-cli slide.md \
             --${{ steps.config.outputs.FORMAT }}
             --allow-local-files
