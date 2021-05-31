@@ -57,9 +57,10 @@ jobs:
           echo $PWD
           echo ${PWD}/${PDF_DIR}
           ls -lR
-          docker run --rm --init -v ${PWD}/${PDF_DIR}:/home/marp/app/ \
+          docker run --rm -u marp --init -v ${PWD}/${PDF_DIR}:/home/marp/app/ \
             -e LANG=$LANG marpteam/marp-cli slide.md \
             --${{ steps.config.outputs.FORMAT }}
+            --allow-local-files
 
       # アーティファクトの作成及びアップロード
       #- name: Upload Artifact
