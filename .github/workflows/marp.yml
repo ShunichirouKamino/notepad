@@ -58,7 +58,7 @@ jobs:
           echo ${PWD}/${PDF_DIR}
           ls -lR
           docker run --rm --init -v ${PWD}/${PDF_DIR}:/home/marp/app/ \
-            -e LANG=$LANG marpteam/marp-cli ./98_presentation/pdf/slide.md \
+            -e LANG=$LANG marpteam/marp-cli slide.md \
             --${{ steps.config.outputs.FORMAT }}
 
       # アーティファクトの作成及びアップロード
