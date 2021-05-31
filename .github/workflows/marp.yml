@@ -58,7 +58,7 @@ jobs:
           docker run --rm -u root --init -v $PWD:/home/marp/app/ \
             -e LANG=$LANG marpteam/marp-cli slide.md \
             -o slide.${{steps.config.outputs.FORMAT}}
-          echo "::set-output name=FILE::${PWD}/${PDF_DIR}/slide.${{steps.config.outputs.FORMAT}}"
+          echo "::set-output name=FILE::${PWD}/slide.${{steps.config.outputs.FORMAT}}"
           ls -lR
           pwd
 
