@@ -42,3 +42,4 @@
 
 - [Marp](https://zenn.dev/gakin/articles/set_up_marp_on_github_actions)
 - [公開鍵暗号と電子署名の基礎知識](https://qiita.com/kunichiko/items/ef5efdb41611d6cf7775)
+- [使用中グローバルIPアドレス確認](https://www.cman.jp/network/support/go_access.cgi)
