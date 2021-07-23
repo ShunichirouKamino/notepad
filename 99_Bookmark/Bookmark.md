@@ -85,3 +85,4 @@
 - [立体的な表現で見やすいネットワーク図がブラウザ上で作成できる「Isoflow」](https://gigazine.net/news/20210722-isoflow/)
   - 視覚的に理解しやすいアイソメトリック図を記載、共有ができるツール
   - 無料版では設置ノード 8 個・保存プロジェクトは 3 件の制約
+- [使用中グローバル IP アドレス確認](https://www.cman.jp/network/support/go_access.cgi)
