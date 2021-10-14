@@ -90,3 +90,4 @@
 - [material.io](https://material.io/)
 - [fonts](https://fonts.google.com/icons?icon.query=app)
 - [icooon-mono](https://icooon-mono.com/tag/%E5%8B%89%E5%BC%B7%E4%BC%9A/)
+- [freepik](https://jp.freepik.com/free-icon/jar-file-format_741926.htm)
