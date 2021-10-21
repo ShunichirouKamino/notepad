@@ -52,6 +52,7 @@
 # マイクロサービス
 
 - [AWS Startup ブログ](https://aws.amazon.com/jp/blogs/startup/techblog-microservices-introduction/)
+- [Microsoft Ignite](https://docs.microsoft.com/ja-jp/azure/architecture/microservices/model/domain-analysis)
 
 # Java
 
