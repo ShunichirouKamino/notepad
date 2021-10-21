@@ -39,6 +39,16 @@
   - ヘッドレスサービスは、DNS の A レコードに登録される IP アドレスが Pod の IP アドレスそのものになるサービス提供形態。通常は Service に IP アドレスと Pod のホスト名が A レコードに登録されるため、Service の IP アドレスによってロードバランシングされる。
   - ヘッドレスサービスは、StatefulSet のように永続的なデータを保持したロードバランシングされたくないリソースへのアクセスに利用される。
 
+# DDD
+- [「実践ドメイン駆動設計」を読んだので、実際にDDDで設計して作ってみた！](https://qiita.com/APPLE4869/items/d210ddc2cb1bfeea9338)
+  - 実践向きの一番分かりやすいDDDの流れ
+- [UMLを描こう – Vol.3 ドメインモデル図](https://blog.asial.co.jp/798)
+  - DDDを行うために必須の図
+  - この時点で、値オブジェクトとエンティティに対しては明確に区別しておくべきであり、ドメインモデルとして登場するものはエンティティとなる。つまり、mutable
+  - 簡易的なクラス図であり、線の種類は、「has-one, has-many, is-a-kind-of」の3種類だけでOK
+- [ロバストネス図を活用したシステム設計](https://thinkit.co.jp/article/13487)
+  - ドメインモデル設計における見直し、違和感を感じ取るために行う
+
 # マイクロサービス
 
 - [AWS Startup ブログ](https://aws.amazon.com/jp/blogs/startup/techblog-microservices-introduction/)
