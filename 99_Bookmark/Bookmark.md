@@ -48,6 +48,7 @@
   - 簡易的なクラス図であり、線の種類は、「has-one, has-many, is-a-kind-of」の3種類だけでOK
 - [ロバストネス図を活用したシステム設計](https://thinkit.co.jp/article/13487)
   - ドメインモデル設計における見直し、違和感を感じ取るために行う
+- [ロバストネス分析の目的](https://qiita.com/reoring/items/d3c5bb9506386404b297)
 
 # マイクロサービス
 
