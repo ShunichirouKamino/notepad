@@ -61,6 +61,11 @@
 - [コンテナ時代における最新の Java&JVM 監視](https://b.chiroito.dev/entry/2021/06/23/163430)
   - k8s 上で動作する Java アプリの監視手法としては、Elasticsearch+Kibana や Prometheus+Grafana などが挙げられる。
   - Cryostat を利用して、コンテナ上で JFR を利用した監視をおこなう手法の紹介。
+- [ノンブロッキングチャネル](https://www.techscore.com/tech/Java/JavaSE/NIO/5/)
+  - Javaのネットワーク実装の歴史
+  - java.netでソケットaccept, readを用いるとそもそもシングルスレッドになり、入出力待ち状態になる。これをネットワークの世界ではブロックという。そのため、マルチスレッドで実装する必要が有った。
+  - スレッド作成はコストがかかり、アクセスが多い場合はオーバヘッドが無視できなくなる。そこで登場したのがNIO。
+  - NIOは、ブロックの発生しないソケット入出力を実現可能。これは、java.nioパッケージで実装されている。
 
 # CI/CD
 
