@@ -5,7 +5,6 @@ on:
     branches:
       # create-pdfブランチへのプッシュ時にアーティファクト作成
       - create-pdf/*
-      - main
 
 env:
   PDF_CONFIG_FILE: ./98_presentation/pdf/config.json
@@ -55,6 +54,7 @@ jobs:
         id: build
         run: |-
           cd ${PDF_DIR}
+          echo ${{steps.extract_branch.outputs.BRANCH_BASE}}
           docker run --rm -u root --init -v $PWD:/home/marp/app/ \
             -e LANG=$LANG marpteam/marp-cli slide.md \
             -o slide.${{steps.config.outputs.FORMAT}}
