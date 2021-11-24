@@ -25,7 +25,8 @@ jobs:
       - name: Extract File Name
         id: extract_branch
         run: |-
-          tag=$(echo ${GITHUB_REF#refs/heads/} | sed -e 's@${BRANCH_BASE}@@g')
+          tag=$(echo ${GITHUB_REF#refs/heads/} | sed -e 's@create-pdf/@@g')
+          echo ${tag}
           echo "::set-output name=BRANCH::${tag}"
 
       # おまじない及びjson操作コマンドのインストール
