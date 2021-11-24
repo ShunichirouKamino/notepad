@@ -58,7 +58,7 @@ jobs:
           echo ${{steps.extract_branch.outputs.BRANCH}}
           docker run --rm -u root --init -v $PWD:/home/marp/app/ \
             -e LANG=$LANG marpteam/marp-cli ${{steps.extract_branch.outputs.BRANCH}}.md \
-            -o slide.${{steps.config.outputs.FORMAT}}
+            -o ${{steps.extract_branch.outputs.BRANCH}}.${{steps.config.outputs.FORMAT}}
           echo "::set-output name=FILE::${PWD}/slide.${{steps.config.outputs.FORMAT}}"
 
       # アーティファクトの作成及びアップロード
