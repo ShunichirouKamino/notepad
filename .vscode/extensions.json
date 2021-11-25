@@ -2,7 +2,6 @@
     "recommendations": [
         "shd101wyy.markdown-preview-enhanced",
         "alanwalk.markdown-toc",
-        "marp-team.marp-vscode",
         "hediet.vscode-drawio",
         "ms-azuretools.vscode-docker"
     ]
