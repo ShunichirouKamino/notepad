@@ -4,3 +4,8 @@
 - コマンドパレットオープン(F1 or Ctrl + Shift + P)
 - `Extensions: Add Extension to Workspace Folder Recomendations`を選択
 - 自動で`./vscode/extensions.json`が生成される
+
+## shortcut
+
+- `` Ctrl + ` ``
+  - ターミナルのオープン／クローズ
