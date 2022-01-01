@@ -27,7 +27,7 @@ match guess.cmp(&secret_number) {
 }
 ```
 
-- mutch によるパターンマッチング。
+- mutch によるパターンマッチング。以下の例では、parse の返り値`Result`型は、Ok もしくは Err の列挙型を返却する。Ok の場合の引数を guess に u32 型として返却。Err の場合は continue（ループの中で利用してる体）
 
 ```rust
 let guess: u32 = match guess.trim().parse() {
@@ -35,6 +35,10 @@ let guess: u32 = match guess.trim().parse() {
     Err(_) => continue,
 };
 ```
+
+# 豆知識
+
+- toml の由来は、`Tom's Obvious, Minimal Language`の略。[Tom Preston-Werner](https://twitter.com/mojombo)氏によって作成された。GitHub の共同創業者。
 
 # 参考
 
