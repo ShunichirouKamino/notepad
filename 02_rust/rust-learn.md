@@ -1,6 +1,6 @@
 # Rust 学習ノート
 
-# 重要ポイント
+## コーディング
 
 - Rust で変数はデフォルトで不変、Java のような final は不要。
   - 逆に、可変にする場合は`mut`を利用し、`let mut a = String::new();`のように宣言する。
@@ -36,10 +36,27 @@ let guess: u32 = match guess.trim().parse() {
 };
 ```
 
-# 豆知識
+- エラーハンドリングは、`Result`型の Enum を利用する。`try-catch`は無い。
+
+```rust
+pub enum Result<T, E> {
+    Ok(T),
+    Err(E),
+}
+```
+
+## パッケージ管理
+
+- cargo によってパッケージ管理され、Cargo.toml, Cargo.lock にて依存ライブラリが記載される。
+  - 依存ライブラリは、[crates.io](https://crates.io/)にて公開される。
+- ビルドのタイプはバイナリ（bin）もしくはライブラリ（lib）となり、ビルドした一式のコンパイル単位をクレート（crate）と呼ぶ。
+  - bin の場合は、`$ cargo new hello_world`もしくは`$ cargo init --bin hello_world`にてプロジェクトを作成する。
+    - init の場合、引数に何も与えない場合はカレントディレクトリを root とみなす。
+
+## 豆知識
 
 - toml の由来は、`Tom's Obvious, Minimal Language`の略。[Tom Preston-Werner](https://twitter.com/mojombo)氏によって作成された。GitHub の共同創業者。
 
-# 参考
+## 参考
 
 - ![The Rust Programming Language](https://doc.rust-lang.org/book/ch01-02-hello-world.html#anatomy-of-a-rust-program)
