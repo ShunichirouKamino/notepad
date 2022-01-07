@@ -59,4 +59,5 @@ pub enum Result<T, E> {
 
 ## 参考
 
-- ![The Rust Programming Language](https://doc.rust-lang.org/book/ch01-02-hello-world.html#anatomy-of-a-rust-program)
+- [The Rust Programming Language](https://doc.rust-lang.org/book/ch01-02-hello-world.html#anatomy-of-a-rust-program)
+- [The Rust Programming Language 日本語版](https://doc.rust-jp.rs/book-ja/title-page.html)
