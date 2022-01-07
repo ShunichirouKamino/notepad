@@ -17,15 +17,6 @@ PS D:\workspace\my-hooks> $ yarn -v
 1.22.17
 ```
 
-以降の手順
-
-- `npx create-react-app my-hooks --user-npm`
-  - 初期 React アプリのテンプレを構築する。プロキシ下のみ`--user-npm`が必要
-- `npm install @material-ui/core`
-  - [material-ui](https://material-ui.com/ja/)のインストール
-- `npm start`
-  - [localhost:3000](localhost:3000)にアクセスすることで React アプリ起動
-
 ## ランタイムツール
 
 pm2 の docker コンテナ動作用ランタイム、[pm2-runtime](https://github.com/ISID/m-sherpa-frontend/blob/develop/docker/Sherpa_Frontend_Dockerfile#L49)
