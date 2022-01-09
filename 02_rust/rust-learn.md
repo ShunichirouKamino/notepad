@@ -45,11 +45,47 @@ pub enum Result<T, E> {
 }
 ```
 
-- [Rust -1.13](https://blog.rust-lang.org/2016/11/10/Rust-1.13.html)リリースで導入された`?`演算子 は、`Result`の複雑化を防ぐために導入されました。
+- Rust における[クロージャ](https://doc.rust-jp.rs/rust-by-example-ja/fn/closures.html)は、外側の環境を補足した関数のことです。元々クロージャの説明は、以下のようなものをよく目にします。
+
+  - 関数が定義された時点での環境を保存しておき、関数の実行時に再利用できる構造。
+  - 自関数の外のスコープ変数を操作するインナー関数。
+  - 大雑把に言えば、関数のスコープにある変数を自分が定義された環境に閉じ込めるためのデータ構造。
+
+**JavaScript では、以下のような関数の inner 関数をクロージャと呼びます**
+
+```js
+function outer() {
+  var x = 10;
+  function inner() {
+    alert(x);
+    x = x + 1;
+  }
+  return inner;
+}
+
+var f = outer();
+
+f(); // 10
+f(); // 11
+f(); // 12
+```
+
+**Rust では、Java で言う無名関数や lambda 式のことを指し、関数の定義とその関数からスコープ外変数を参照することを合わせてクロージャと呼ぶ**
+
+```rust
+fn main() {
+    ...
+    let x = 1;
+    let c1 = || println!("{}", x);
+    c1(); // 1
+}
+```
+
+- [Rust - 1.13](https://blog.rust-lang.org/2016/11/10/Rust-1.13.html)リリースで導入された`?`演算子 は、`Result`の複雑化を防ぐために導入されました。
   - `?`演算子は、`Result`を返す関数の中でしか利用できません。
   - `?`演算子は、`Result`型の後につけることで、`Ok`なら中の値の返却、`Err`なら即座に値を return します。
 
-**これまでの書き方**
+**これまでの書き方では、File::open の Result と read_to_string の Result をそれぞれ Result 処理していました。**
 
 ```rust
 fn read_username_from_file() -> Result<String, io::Error> {
@@ -69,7 +105,33 @@ fn read_username_from_file() -> Result<String, io::Error> {
 }
 ```
 
-- ## async/await が Rust 1.38.0 にてリリース。
+**これまでは try!マクロという書き方で Result 型の際に処理を省略することが可能でした。**
+
+```rust
+fn read_username_from_file() -> Result<String, io::Error> {
+    let mut f = try!(File::open("username.txt"));
+    let mut s = String::new();
+
+    try!(f.read_to_string(&mut s));
+
+    Ok(s)
+}
+```
+
+**?演算子を用いた書き方では、さらにシンタックスシュガーが可能です。**
+
+```rust
+fn read_username_from_file() -> Result<String, io::Error> {
+    let mut f = File::open("username.txt")?;
+    let mut s = String::new();
+
+    f.read_to_string(&mut s)?;
+
+    Ok(s)
+}
+```
+
+- [Rust - 1.39.0](https://blog.rust-lang.org/2019/11/07/Rust-1.39.0.html)リリースで導入された `async/await`
 
 ## パッケージ管理
 
@@ -151,6 +213,8 @@ $ rustup update
 
 - [The Rust Programming Language](https://doc.rust-lang.org/book/ch01-02-hello-world.html#anatomy-of-a-rust-program)
 - [The Rust Programming Language 日本語版](https://doc.rust-jp.rs/book-ja/title-page.html)
+- [Rust Blog](https://blog.rust-lang.org/)
+  - Rust のリリース情報など
 - [Qiita - Rust に影響を与えた言語たち](https://qiita.com/hinastory/items/e97d5459b9cda45758db)
 
 ## VScode での環境構築
