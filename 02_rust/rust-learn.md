@@ -49,6 +49,7 @@ pub enum Result<T, E> {
 
 - cargo によってパッケージ管理され、Cargo.toml, Cargo.lock にて依存ライブラリが記載される。
   - 依存ライブラリは、[crates.io](https://crates.io/)にて公開される。
+  - 公開されたライブラリに対するドキュメントは、[Docs.rs](https://docs.rs/)にて公開される。
 - ビルドのタイプはバイナリ（bin）もしくはライブラリ（lib）となり、ビルドした一式のコンパイル単位をクレート（crate）と呼ぶ。
   - bin の場合は、`$ cargo new hello_world`もしくは`$ cargo init --bin hello_world`にてプロジェクトを作成する。
     - init の場合、引数に何も与えない場合はカレントディレクトリを root とみなす。
@@ -124,6 +125,7 @@ $ rustup update
 
 - [The Rust Programming Language](https://doc.rust-lang.org/book/ch01-02-hello-world.html#anatomy-of-a-rust-program)
 - [The Rust Programming Language 日本語版](https://doc.rust-jp.rs/book-ja/title-page.html)
+- [Qiita - Rust に影響を与えた言語たち](https://qiita.com/hinastory/items/e97d5459b9cda45758db)
 
 ## VScode での環境構築
 
