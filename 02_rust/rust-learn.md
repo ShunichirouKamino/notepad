@@ -52,6 +52,8 @@ pub enum Result<T, E> {
 - ビルドのタイプはバイナリ（bin）もしくはライブラリ（lib）となり、ビルドした一式のコンパイル単位をクレート（crate）と呼ぶ。
   - bin の場合は、`$ cargo new hello_world`もしくは`$ cargo init --bin hello_world`にてプロジェクトを作成する。
     - init の場合、引数に何も与えない場合はカレントディレクトリを root とみなす。
+- Cargo.lock は、lib クレートの場合は構成管理に含めないが、バイナリクレートの場合は構成管理に含める。（[参考：Cargo.toml と Cargo.lock](https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html)）
+  - lib クレートを利用するクレートにとって、lib クレートでのバージョンが固定されることで他 lib クレートとのバージョンの競合を防ぐため。
 - 利用者のフィーチャーフラグの利用方法。
   - フィーチャーフラグとは、コードを書き換えることなく動的にシステムの振る舞いを変更することができる開発手法を指す。
   - クレート内の特定の機能の有効／無効を切り替えることが可能。
