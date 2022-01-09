@@ -52,6 +52,42 @@ pub enum Result<T, E> {
 - ビルドのタイプはバイナリ（bin）もしくはライブラリ（lib）となり、ビルドした一式のコンパイル単位をクレート（crate）と呼ぶ。
   - bin の場合は、`$ cargo new hello_world`もしくは`$ cargo init --bin hello_world`にてプロジェクトを作成する。
     - init の場合、引数に何も与えない場合はカレントディレクトリを root とみなす。
+- 利用者のフィーチャーフラグの利用方法。
+  - フィーチャーフラグとは、コードを書き換えることなく動的にシステムの振る舞いを変更することができる開発手法を指す。
+  - クレート内の特定の機能の有効／無効を切り替えることが可能。
+  - クレートによってはデフォルトでいくつかのフラグが有効になっていることも有るため、`default-features = false`を指定すると無効にできる。
+
+**Cargo.toml**
+
+```toml
+[dependencies]
+actix-web = { version = "4.0.0-beta.13", default-features = false }
+```
+
+- クレート作成者のフィーチャーフラグの利用方法。
+  - 自作したクレートにフィーチャーフラグを設定する場合は、以下のように toml にフィーチャーフラグを設定する。
+  - 以下のような設定で、`ja`フィーチャーフラグが有効な場合とそうでない場合で、依存先のクレートでの関数の振る舞いを動的にすることができる。
+
+**Cargo.toml**
+
+```tomol
+[features]
+default = []
+ja = []
+```
+
+**lib.rs**
+
+```rs
+#[cfg(not(feature="ja"))]
+pub fn hello() -> &'static str {
+    "hello"
+}
+#[cfg(feature="ja")]
+pub fn hello() -> &'static str {
+    "こんにちは"
+}
+```
 
 ## 豆知識
 
