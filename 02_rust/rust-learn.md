@@ -91,6 +91,31 @@ pub fn hello() -> &'static str {
 }
 ```
 
+## トレインモデル
+
+Rust では、コードの安全性に注意するため、リリースを以下の３バージョンに分けている。（[（参考）Nightly Rust](https://doc.rust-jp.rs/book-ja/appendix-07-nightly-rust.html)）
+
+- Nightly
+- Beta
+- Stable
+
+Nightly は毎日作られるリリースで、6 週間ごとに Beta に合流する。さらに 6 週間で、Beta が Stable に合流する。
+Stable 版は、1.X の X 部分にあたるリリースとなる。
+
+- 現時点のビルドバージョンの確認方法
+
+```bash
+$ rustup default
+nightly-x86_64-pc-windows-msvc (default)
+```
+
+- デフォルトのビルドバージョンの変更方法
+
+```bash
+$ rustup default nightly
+$ rustup update
+```
+
 ## 豆知識
 
 - toml の由来は、`Tom's Obvious, Minimal Language`の略。[Tom Preston-Werner](https://twitter.com/mojombo)氏によって作成された。GitHub の共同創業者。
