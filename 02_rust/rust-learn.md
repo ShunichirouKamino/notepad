@@ -61,3 +61,22 @@ pub enum Result<T, E> {
 
 - [The Rust Programming Language](https://doc.rust-lang.org/book/ch01-02-hello-world.html#anatomy-of-a-rust-program)
 - [The Rust Programming Language 日本語版](https://doc.rust-jp.rs/book-ja/title-page.html)
+
+## VScode での環境構築
+
+- extention.json
+
+```json
+{
+  "recommendations": ["matklad.rust-analyzer", "vadimcn.vscode-lldb"],
+  "unwantedRecommendations": []
+}
+```
+
+インストール後、`rust-analyzer`を動かすためには以下コンポーネントを追加する。
+
+```bash
+$ rustup component add rust-src
+$ rustup component add rust-analysis
+$ rustup component add rls
+```
