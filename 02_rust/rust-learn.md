@@ -201,6 +201,24 @@ fn main() {
 }
 ```
 
+- `impl Struct...`により、構造体にいくつかのメソッドを追加できます。例えば、構造体のインスタンシエートルールなどを記載することができます。以下の例では、String 引数を受け取り`Task`構造体をインスタンシエートする`new`ファンクションを定義しています。
+
+```rust
+use chrono::{DateTime, Utc};
+
+pub struct Task {
+    pub text: String,
+    pub created_at: DateTime<Utc>,
+}
+
+impl Task {
+    pub fn new(text: String) -> Task {
+        let created_at: DateTime<Utc> = Utc::now();
+        Task { text, created_at }
+    }
+}
+```
+
 - [Rust - 1.39.0](https://blog.rust-lang.org/2019/11/07/Rust-1.39.0.html)リリースで導入された `async/await`
 
 - ドキュメンテーションコメント
