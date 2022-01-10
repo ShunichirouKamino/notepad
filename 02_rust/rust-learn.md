@@ -36,12 +36,19 @@ let guess: u32 = match guess.trim().parse() {
 };
 ```
 
-- エラーハンドリングは、`Result`型の Enum を利用します。
+- エラーハンドリングは、`Result`型や`Option`型の Enum を利用します。
+  - `Result`は、失敗するかもしれない処理を表現します。
+  - `Option`は、取得できないかもしれない値を表現します。
 
 ```rust
 pub enum Result<T, E> {
     Ok(T),
     Err(E),
+}
+
+pub enum Option<T> {
+    None,
+    Some(T),
 }
 ```
 
