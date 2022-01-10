@@ -170,6 +170,24 @@ pub enum Action {
 | f32          | -3.4028235e38           | 3.4028235e38           |
 | f64          | -1.7976931348623157e308 | 1.7976931348623157e308 |
 
+- [ベクタ型](https://doc.rust-jp.rs/rust-by-example-ja/std/vec.html)
+  - ベクタ型は、サイズを変更可能な配列。
+
+```rust
+    let collected_iterator: Vec<i32> = (0..10).collect();
+    println!("Collected (0..10) into: {:?}", collected_iterator);
+    // -> Collected (0..10) into: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+    let xs = vec![1i32, 2, 3];
+    println!("Initial vector: {:?}", xs);
+    // -> Initial vector: [1, 2, 3]
+
+    let mut mute_xs = vec![1i32, 2, 3];
+    mute_xs.push(4);
+    println!("Added vector: {:?}", mute_xs);
+    // -> Added vector: [1, 2, 3, 4]
+```
+
 - [トレイト](https://doc.rust-jp.rs/book-ja/ch10-02-traits.html)（共通の振る舞いを定義する、他の言語でいうインターフェースのようなもの）により、継承先クラスで共通して利用される標準的な実装を提供できます。
 
 - `[#derive]`アトリビュートは、構造体や列挙型に振る舞いを追加できます。
