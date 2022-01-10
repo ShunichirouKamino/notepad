@@ -112,7 +112,7 @@ fn read_username_from_file() -> Result<String, io::Error> {
 }
 ```
 
-**これまでは try!マクロという書き方で Result 型の際に処理を省略することが可能でした。**
+**これまでは try!マクロ記法で Result 型の際に処理を省略することが可能でした。**
 
 ```rust
 fn read_username_from_file() -> Result<String, io::Error> {
@@ -169,6 +169,37 @@ pub enum Action {
 | usize(64bit) | 0                       | 18446744073709551615   |
 | f32          | -3.4028235e38           | 3.4028235e38           |
 | f64          | -1.7976931348623157e308 | 1.7976931348623157e308 |
+
+- [トレイト](https://doc.rust-jp.rs/book-ja/ch10-02-traits.html)（共通の振る舞いを定義する、他の言語でいうインターフェースのようなもの）により、継承先クラスで共通して利用される標準的な実装を提供できます。
+
+- `[#derive]`アトリビュートは、構造体や列挙型に振る舞いを追加できます。
+
+**Debug により、`{:?}`デバッグ出力フォーマットを指定可能になります。**
+
+```rust
+#[derive(Debug)]
+struct Data {
+    value: i32,
+}
+fn main() {
+    let d = Data { value: 2 };
+    println!("{:?}", d); // Data { value: 2 }
+}
+```
+
+**PartialEq により、オブジェクトの等価判定が可能になります。**
+
+```rust
+#[derive(Debug, PartialEq)]
+struct Data {
+    value: i32,
+}
+fn main() {
+    let d1 = Data { value: 2 };
+    let d2 = Data { value: 2 };
+    assert_eq!(d1, d2);
+}
+```
 
 - [Rust - 1.39.0](https://blog.rust-lang.org/2019/11/07/Rust-1.39.0.html)リリースで導入された `async/await`
 
