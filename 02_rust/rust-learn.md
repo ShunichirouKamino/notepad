@@ -131,6 +131,38 @@ fn read_username_from_file() -> Result<String, io::Error> {
 }
 ```
 
+- Rust における`enum`は、直和型を管理できます。直和型は、一言でいうと直積型（構造体）の列挙型です。
+  - [代数的データ型](https://zenn.dev/khale/articles/java-17-tips#%E4%BB%A3%E6%95%B0%E7%9A%84%E3%83%87%E3%83%BC%E3%82%BF%E5%9E%8B)参照。
+
+```rust
+pub enum Action {
+    Add { task: String },
+    Done { position: usize },
+    List,
+}
+```
+
+- 数値型まとめ
+  - `i`は符号あり整数型
+  - `u`は符号なし整数型
+  - アルファベットに続く数値により bit 数を確保
+  - `isize`と`usize`は、動作コンピュータの種類に依存する。
+
+| 型           | 最小値                  | 最大値                 |
+| ------------ | ----------------------- | ---------------------- |
+| i8           | -128                    | 127                    |
+| i16          | -32768                  | 32767                  |
+| i32          | -2147483648             | 2147483647             |
+| i64          | -9223372036854775808    | 9223372036854775807    |
+| u8           | 0                       | 255                    |
+| u16          | 0                       | 65535                  |
+| u32          | 0                       | 4294967295             |
+| u64          | 0                       | 18446744073709551615   |
+| isize(64bit) | -9223372036854775808    | 9223372036854775807    |
+| usize(64bit) | 0                       | 18446744073709551615   |
+| f32          | -3.4028235e38           | 3.4028235e38           |
+| f64          | -1.7976931348623157e308 | 1.7976931348623157e308 |
+
 - [Rust - 1.39.0](https://blog.rust-lang.org/2019/11/07/Rust-1.39.0.html)リリースで導入された `async/await`
 
 ## パッケージ管理
@@ -180,6 +212,22 @@ pub fn hello() -> &'static str {
 }
 ```
 
+- クレートのサーチ方法として、`$ cargo search`コマンドが用意されている。例として、コマンドライン引数を解析するクレートの検索を行うと以下のような結果となる。
+
+```bash
+$ cargo search structopt
+structopt = "0.3.25"               # Parse command line argument by defining a struct.
+structopt-yaml = "0.4.6"           # An default value loader from YAML for structopt
+structopt-toml = "0.5.0"           # An default value loader from TOML for structopt
+structopt-yaml-derive = "0.4.6"    # A derive crate of structopt-yaml
+structopt-flags = "0.3.6"          # Collection of reusable flags for StructOpt
+indigo-structopt = "0.3.21"        # Parse command line argument by defining a struct.
+structopt-utilities = "0.1.0"      # Small utilities related to structopt and clap
+structopt-toml-derive = "0.5.0"    # A derive crate of structopt-toml
+paw-structopt = "1.0.0"            # Structopt support for the Paw crate.
+ethers-structopt = "0.1.0"         # Structopt derived ethers-rs types, useful for building Ethereum CLIs
+```
+
 ## トレインモデル
 
 Rust では、コードの安全性に注意するため、リリースを以下の３バージョンに分けています。（[（参考）Nightly Rust](https://doc.rust-jp.rs/book-ja/appendix-07-nightly-rust.html)）
@@ -215,6 +263,8 @@ $ rustup update
 - [The Rust Programming Language 日本語版](https://doc.rust-jp.rs/book-ja/title-page.html)
 - [Rust Blog](https://blog.rust-lang.org/)
   - Rust のリリース情報など
+- [Rust の最初のステップ](https://docs.microsoft.com/ja-jp/learn/paths/rust-first-steps/)
+  - Microsoft 提供の Rust 学習コンテンツ
 - [Qiita - Rust に影響を与えた言語たち](https://qiita.com/hinastory/items/e97d5459b9cda45758db)
 
 ## VScode での環境構築
