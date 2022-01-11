@@ -35,6 +35,7 @@ fn main() {
 - 関数の最後に評価された式の値が返り値になります。
   - 以下の例では、left + right が最後に評価され、return 値となります。
   - この場合、返却する式にはセミコロンは不要です。
+    - 式(expression)は値を返し、文(statement)は値を返しません。式には、セミコロンは不要です。
 
 ```rust
 fn plus(left: i32, right: i32) -> i32 {
@@ -74,7 +75,7 @@ let guess: u32 = match guess.trim().parse() {
 };
 ```
 
-- エラーハンドリングは、`Result`型や`Option`型の Enum を利用します。
+- エラーハンドリングは、`Result`型や`Option`型の Enum を利用します。Rust では、null も例外もありません。
   - `Result`は、失敗するかもしれない処理を表現します。
   - `Option`は、取得できないかもしれない値を表現します。
 
