@@ -96,11 +96,36 @@ match guess.cmp(&secret_number) {
 
 - mutch によるパターンマッチング例です。以下の例では、parse の返り値`Result`型は、Ok もしくは Err の列挙型を返却します。Ok の場合の引数を guess に u32 型として返却します。Err の場合は continue（ループの中で利用してる体）を明示してます。
 
+**Result の Enum における簡単なパターンマッチング例**
+
 ```rust
 let guess: u32 = match guess.trim().parse() {
     Ok(num) => num,
     Err(_) => continue,
 };
+```
+
+**直和型 Enum における複雑なパターンマッチング例**
+
+```rust
+pub enum Action {
+    Add {
+        text: String,
+    },
+    Done {
+        position: usize,
+    },
+    List,
+}
+
+fn action_pattern_match() {
+    match action {
+        Add { text } => tasks::add_task(text, .. ), // Addは構造体であるため、引数としてStringのtextを中括弧で受け取ります
+        List => tasks::list_tasks( .. ),  // Listは引数を取りません
+        Done { position } => tasks::complete_task(position, .. ), // Doneは構造体であるため、引数としてusizeのpositionを中括弧で受け取ります
+    }
+    .expect("Faild to perform action")
+}
 ```
 
 - エラーハンドリングは、`Result`型や`Option`型の Enum を利用します。Rust では、null も例外もありません。
