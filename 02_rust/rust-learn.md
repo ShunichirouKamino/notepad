@@ -91,6 +91,18 @@ pub enum Option<T> {
 }
 ```
 
+- エラーハンドリングでは、`panic`を起こすことで巻き戻して、プログラムを終了することも可能です。
+
+```rust
+fn panic_sample() {
+    panic!("crash and burn");  //一番簡単なpanicの発生は、panicマクロを利用します。
+}
+
+fn file_load() {
+    let file = input.expect("Failed to find journal file"); // expectは、失敗時にpanicを発生させプログラムを終了させます。
+}
+```
+
 - Rust における[クロージャ](https://doc.rust-jp.rs/rust-by-example-ja/fn/closures.html)は、外側の環境を補足した関数のことです。元々クロージャの説明は、以下のようなものをよく目にします。
 
   - 関数が定義された時点での環境を保存しておき、関数の実行時に再利用できる構造。
