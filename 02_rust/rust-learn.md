@@ -118,7 +118,7 @@ pub enum Action {
     List,
 }
 
-fn action_pattern_match() {
+fn action_pattern_match(action: Action) {
     match action {
         Add { text } => tasks::add_task(text, .. ), // Addは構造体であるため、引数としてStringのtextを中括弧で受け取ります
         List => tasks::list_tasks( .. ),  // Listは引数を取りません
