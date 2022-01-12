@@ -32,6 +32,34 @@ fn main() {
 }
 ```
 
+- 分割代入（非構造化変数束縛）
+
+**構造体の例**
+
+```rust
+struct Something {
+    foo: i32,
+    bar: char,
+}
+
+//
+let something = Something {
+    foo: 23,
+    bar: 'B',
+};
+
+let Something { foo, bar } = something; // 構造体の分割代入
+println!("{} {}", foo, bar);
+
+let Something { foo, bar: qux } = something; // 別名代入付与
+println!("{} {} {}", foo, qux);
+
+let Something { foo, .. } = something; // 残余パターンによる分割代入
+println!("{}", foo);
+
+
+```
+
 - 関数の最後に評価された式の値が返り値になります。
   - 以下の例では、left + right が最後に評価され、return 値となります。
   - この場合、返却する式にはセミコロンは不要です。
