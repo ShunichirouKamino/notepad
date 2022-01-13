@@ -71,7 +71,7 @@ fn plus(left: i32, right: i32) -> i32 {
 }
 ```
 
-- シャドウイング。既に宣言した変数に対して、再度変数名を再利用することが可能。型変換を行う際などに利用されます。。
+- シャドウイング。既に宣言した変数に対して、再度変数名を再利用することが可能。型変換を行う際などに利用されます。
 
 ```rust
 let mut guess = String::new();
@@ -274,6 +274,33 @@ pub enum Action {
 | f32          | -3.4028235e38           | 3.4028235e38           |
 | f64          | -1.7976931348623157e308 | 1.7976931348623157e308 |
 
+- 文字列型まとめ
+
+  - [Rust の&str と String について整理したかった](https://matsumaee.hatenablog.com/entry/2021/07/19/194550)
+  - `&str`
+    - プリミティブ型
+    - slice 型
+    - スタックに積まれるため、不変であり、固定サイズ
+    - read-only
+    - コンパイル時にどんなデータか判明する
+    - 例えば CLI ツールの help の文字列など、immutable な文字列を格納するのに向いている
+  - `String`
+    - 標準ライブラリで提供される
+    - ヒープ領域に確保され、可変かつ所有権が有る
+    - UTF-8 エンコードされている
+    - 例えば、標準入力等外部から値を受け取る項目に適している
+
+```rust
+// startがhというポインタと, lengthが5のsliceがスタックに積まれる
+// ポインタ先のhello文字列は、read-only memoryに格納される
+let text_str: &str = "hello";
+
+// startがhというポインタと, lengthが5、確保したヒープの許容量がスタックに積まれる
+// ヒープの許容量は、heapの再割り当てなしで格納できるUTF-8バイト長
+// ポインタ先のhello文字列は、heapに格納される
+let text_string: String = text_str.to_string();
+```
+
 - [ベクタ型](https://doc.rust-jp.rs/rust-by-example-ja/std/vec.html)
   - ベクタ型は、サイズを変更可能な配列。
 
@@ -290,6 +317,16 @@ pub enum Action {
     mute_xs.push(4);
     println!("Added vector: {:?}", mute_xs);
     // -> Added vector: [1, 2, 3, 4]
+```
+
+- Rust における slice は、コレクション内の一連の要素を参照したものを指します。ここでいうコレクションとは、ヒープに確保され、実行時に伸縮可能です。vector や`String`等が該当します。slice は、以下の 2 つの要素から成りたちます。
+
+  - 開始地点のポインタ
+  - そのスライスの長さ
+
+```rust
+let message = String::from("Hello world");
+let world = &message[6..11]; // world
 ```
 
 - [トレイト](https://doc.rust-jp.rs/book-ja/ch10-02-traits.html)（共通の振る舞いを定義する、他の言語でいうインターフェースのようなもの）により、継承先クラスで共通して利用される標準的な実装を提供できます。
