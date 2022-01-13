@@ -284,12 +284,15 @@ pub enum Action {
 
   - [Rust の&str と String について整理したかった](https://matsumaee.hatenablog.com/entry/2021/07/19/194550)
   - `&str`
+
     - プリミティブ型
     - slice 型
     - スタックに積まれるため、不変であり、固定サイズ
     - read-only
     - コンパイル時にどんなデータか判明する
+    - Copy トレイトが実装されており、所有権のムーブが発生しない
     - 例えば CLI ツールの help の文字列など、immutable な文字列を格納するのに向いている
+
   - `String`
     - 標準ライブラリで提供される
     - ヒープ領域に確保され、可変かつ所有権が有る
@@ -305,6 +308,17 @@ let text_str: &str = "hello";
 // ヒープの許容量は、heapの再割り当てなしで格納できるUTF-8バイト長
 // ポインタ先のhello文字列は、heapに格納される
 let text_string: String = text_str.to_string();
+```
+
+- &str と String と同じような関係で、`std::path::Path`と`std::path::PathBuf`が存在する。
+
+```rust
+// strは&str型であり、Copyトレイトが実装されているため所有権を意識しなくても良い
+let str = "/home";
+// 不変なpath変数
+let path = Path::new(str);
+// 可変なpathBuf変数
+let pathBuf = PathBuf::from(str);
 ```
 
 - [ベクタ型](https://doc.rust-jp.rs/rust-by-example-ja/std/vec.html)
