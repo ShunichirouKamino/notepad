@@ -351,6 +351,25 @@ let world = &message[6..11]; // world
 
 - [トレイト](https://doc.rust-jp.rs/book-ja/ch10-02-traits.html)（共通の振る舞いを定義する、他の言語でいうインターフェースのようなもの）により、継承先で共通して利用される標準的な実装を提供できます。ここでいう継承元とは struct を指し、変数しか持てない struct に共通のふるまいを付与することが可能です。
 
+- enum と struct を用いて、直和型を実現することができます。
+
+```rust
+enum IpAddr {
+    V4(u8, u8, u8, u8),
+    V6 { ip: String },
+}
+
+fn main() {
+    println!("Hello, world!");
+
+    let v4 = IpAddr::V4(127, 0, 0, 1);
+    let v6 = IpAddr::V6 {
+        ip: "::1".to_string(),
+    };
+    println!("{:?}, {:?}", v4, v6); // V4(127, 0, 0, 1), V6 { ip: "::1" }
+}
+```
+
 - `[#derive]`アトリビュートは、構造体や列挙型に振る舞いを追加できます。
 
 **Debug により、`{:?}`デバッグ出力フォーマットを指定可能になります。**
