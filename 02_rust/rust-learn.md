@@ -349,7 +349,7 @@ let message = String::from("Hello world");
 let world = &message[6..11]; // world
 ```
 
-- [トレイト](https://doc.rust-jp.rs/book-ja/ch10-02-traits.html)（共通の振る舞いを定義する、他の言語でいうインターフェースのようなもの）により、継承先クラスで共通して利用される標準的な実装を提供できます。
+- [トレイト](https://doc.rust-jp.rs/book-ja/ch10-02-traits.html)（共通の振る舞いを定義する、他の言語でいうインターフェースのようなもの）により、継承先で共通して利用される標準的な実装を提供できます。ここでいう継承元とは struct を指し、変数しか持てない struct に共通のふるまいを付与することが可能です。
 
 - `[#derive]`アトリビュートは、構造体や列挙型に振る舞いを追加できます。
 
