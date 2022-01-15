@@ -48,7 +48,6 @@ struct Something {
     bar: char,
 }
 
-//
 let something = Something {
     foo: 23,
     bar: 'B',
