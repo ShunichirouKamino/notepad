@@ -48,6 +48,7 @@ struct Something {
     bar: char,
 }
 
+
 let something = Something {
     foo: 23,
     bar: 'B',
@@ -147,6 +148,19 @@ pub enum Option<T> {
     None,
     Some(T),
 }
+```
+
+- `Result`や`Option`は、返却されるバリアントによって、便利なメソッドチェインが用意されています。
+  - Option の or_else は、None の場合の代理値を定義できます。
+  - Option の map は、Some の場合の要素に適用する関数を定義できます。
+  - expect は、失敗時に panic を発生させます。
+
+```rust
+
+fn f(a: Option<i32>) {
+    a.or_else(|| Some(100)).map(|x| x * 2).expect("error!");
+}
+
 ```
 
 - エラーハンドリングでは、`panic`を起こすことで巻き戻して、プログラムを終了することも可能です。
