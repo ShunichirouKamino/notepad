@@ -124,6 +124,7 @@ pub enum Action {
     List,
 }
 
+/// 全てのパターンが網羅されていない場合、コンパイルエラーとなります。
 fn action_pattern_match(action: Action) {
     match action {
         Add { text } => tasks::add_task(text, .. ), // Addは構造体であるため、引数としてStringのtextを中括弧で受け取ります
