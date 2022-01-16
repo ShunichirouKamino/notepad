@@ -38,6 +38,41 @@ fn main() {
 }
 ```
 
+- enum の種類とパターンマッチング
+  - unit 型は、要素名のみもしくは要素名＋数値で表現される
+  - taple 型は、型を複数保持できる
+  - struct 型は、型及び変数を保持できる。
+
+```rust
+/// unit
+enum A {
+    One,
+}
+/// taple
+enum B {
+    Two(u8, bool),
+}
+/// struct
+enum C {
+    Three { a: f64, b: String },
+}
+
+fn f() {
+    match something1 {
+        A::One => { /* Do something */ }
+    }
+
+    match something2 {
+        B::Two(x, y) => { /* Do something */ }
+    }
+
+    match something3 {
+        C::Three { a: another_name, b } => { /* Do something */ }
+    }
+}
+
+```
+
 - 分割代入（非構造化変数束縛）
 
 **構造体の例**
