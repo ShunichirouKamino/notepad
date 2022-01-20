@@ -556,6 +556,10 @@ paw-structopt = "1.0.0"            # Structopt support for the Paw crate.
 ethers-structopt = "0.1.0"         # Structopt derived ethers-rs types, useful for building Ethereum CLIs
 ```
 
+## ツールチェーン管理
+
+- `rustup`により、`rustc`や`cargo`等のツール群を一式インストールしてくれます。また、`rust-analyzer`や`rls`といった LSP、`rust-fmt`といったフォーマッタ、`clippy`といった Linter ツールも管理されます。
+
 ## トレインモデル
 
 Rust では、コードの安全性に注意するため、リリースを以下の３バージョンに分けています。（[（参考）Nightly Rust](https://doc.rust-jp.rs/book-ja/appendix-07-nightly-rust.html)）
