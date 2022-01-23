@@ -309,8 +309,8 @@ pub enum Action {
 ```
 
 - 数値型まとめ
-  - `i`は符号あり整数型
-  - `u`は符号なし整数型
+  - `i`は符号あり整数型（Signed Integer Type）
+  - `u`は符号なし整数型（Unsigned Integer Type）
   - アルファベットに続く数値により bit 数を確保
   - `isize`と`usize`は、動作コンピュータの種類に依存する。
 
