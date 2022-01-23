@@ -466,6 +466,16 @@ impl Task {
 }
 ```
 
+- 平均値計算と丸め例
+
+```rust
+    let all = 10000
+    let members: Vec<Member> = // 任意のVec型
+    let round_base: f64 = 100_f64;
+    let average: f64 =
+        ((all / members.len()) as f64 / round_base).round() * round_base;
+```
+
 - [Rust - 1.39.0](https://blog.rust-lang.org/2019/11/07/Rust-1.39.0.html)リリースで導入された `async/await`
 
 - ドキュメンテーションコメント
