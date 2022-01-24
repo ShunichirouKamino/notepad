@@ -476,6 +476,21 @@ impl Task {
         ((all / members.len()) as f64 / round_base).round() * round_base;
 ```
 
+- 合計値計算例
+
+```rust
+    let members: Vec<Member> = // usize yearsをメンバにもつ任意のVec型
+
+    // よくある書き方
+    let years_sum: usize = 0;
+    for member in members {
+        years_sum = years_sum + member.years;
+    }
+
+    // foldを用いたiterの書き方
+    let years_sum = members.iter().fold(0, |sum, member| sum + member.years);
+```
+
 - [Rust - 1.39.0](https://blog.rust-lang.org/2019/11/07/Rust-1.39.0.html)リリースで導入された `async/await`
 
 - ドキュメンテーションコメント
@@ -627,3 +642,8 @@ $ rustup component add rust-src
 $ rustup component add rust-analysis
 $ rustup component add rls
 ```
+
+## 課題
+
+- 継承が無いため、合成など、オブジェクトの関連をどのように表現するかのベストプラクティスを探る
+- vec 内のすべての struct に対して同一の処理をしようとした際に、map では read-only となるためどのように実装すべきか
