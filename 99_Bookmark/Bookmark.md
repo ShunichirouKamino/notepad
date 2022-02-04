@@ -96,6 +96,7 @@
   - TypeScript とも相性がいい。
   - asserts 機能も標準となるため、テストも簡単。
 - [Reactベストプラクティスの宝庫！「bulletproof-react」が勉強になりすぎる件](https://zenn.dev/meijin/articles/bulletproof-react-is-best-architecture)
+- [TypeScript Cheat Sheets](https://www.typescriptlang.org/cheatsheets)
 
 # Other
 
