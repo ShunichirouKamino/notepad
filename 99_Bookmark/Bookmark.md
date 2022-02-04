@@ -1,4 +1,4 @@
-# blog
+# Bookmark
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
@@ -67,6 +67,10 @@
   - スレッド作成はコストがかかり、アクセスが多い場合はオーバヘッドが無視できなくなる。そこで登場したのがNIO。
   - NIOは、ブロックの発生しないソケット入出力を実現可能。これは、java.nioパッケージで実装されている。
 
+# Rust
+- [RustでGraphQLサーバの実装を試してみる](https://zenn.dev/mkazutaka/articles/9b9228da5a741a)
+- 
+
 # CI/CD
 
 - [GitHub Actions ワークフローコマンド](https://docs.github.com/ja/actions/reference/workflow-commands-for-github-actions)
@@ -91,6 +95,7 @@
   - Node.js では外部ライブラリを複数の人が開発し、エコシステムとしては素晴らしいがディペンデンシーが複雑になる傾向に。Deno では標準ライブラリに多くの機能が実装されている。
   - TypeScript とも相性がいい。
   - asserts 機能も標準となるため、テストも簡単。
+- [Reactベストプラクティスの宝庫！「bulletproof-react」が勉強になりすぎる件](https://zenn.dev/meijin/articles/bulletproof-react-is-best-architecture)
 
 # Other
 
@@ -109,3 +114,4 @@
 - [fonts](https://fonts.google.com/icons?icon.query=app)
 - [icooon-mono](https://icooon-mono.com/tag/%E5%8B%89%E5%BC%B7%E4%BC%9A/)
 - [freepik](https://jp.freepik.com/free-icon/jar-file-format_741926.htm)
+- [【エンジニア必見】チートシートまとめ(2022年最新)](https://sbucks-blog.com/program/tool/cheatsheet/02-1/)
