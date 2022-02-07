@@ -69,7 +69,7 @@
 
 # Rust
 - [RustでGraphQLサーバの実装を試してみる](https://zenn.dev/mkazutaka/articles/9b9228da5a741a)
-- 
+- [新しいRustプログラマーのために学ぶための9つの不可欠な機能](https://kerkour.com/indispensable-rust-features-to-learn/)
 
 # CI/CD
 
