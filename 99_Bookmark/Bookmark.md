@@ -97,6 +97,9 @@
   - asserts 機能も標準となるため、テストも簡単。
 - [Reactベストプラクティスの宝庫！「bulletproof-react」が勉強になりすぎる件](https://zenn.dev/meijin/articles/bulletproof-react-is-best-architecture)
 - [TypeScript Cheat Sheets](https://www.typescriptlang.org/cheatsheets)
+- [paddingとmarginの違いをできる限り難しい言葉を使わず説明してみた](https://webliker.info/50549/)
+  - marginはbox外側余白
+  - paddingはbox内側余白
 
 # Other
 
