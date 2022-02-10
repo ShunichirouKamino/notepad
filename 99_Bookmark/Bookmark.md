@@ -79,7 +79,7 @@
     - set-output が属するブロックには、必ず任意の id 要素として、`id: ANY`を指定
     - 利用する際は、`${{ steps.ANY.outputs.NAME }}`にて`VALUE`を取り出すことが可能
 
-# フロントエンド
+# React
 
 - [React の新しい状態管理ライブラリ「Recoil」とは？ Redux との違いを解説](https://ics.media/entry/210224/)
 - [【LINE 証券 FrontEnd】Recoil を使って安全快適な状態管理を手に入れた話](https://engineering.linecorp.com/ja/blog/line-sec-frontend-using-recoil-to-get-a-safe-and-comfortable-state-management/)
@@ -96,11 +96,19 @@
   - TypeScript とも相性がいい。
   - asserts 機能も標準となるため、テストも簡単。
 - [Reactベストプラクティスの宝庫！「bulletproof-react」が勉強になりすぎる件](https://zenn.dev/meijin/articles/bulletproof-react-is-best-architecture)
+
+# TypeScript
 - [TypeScript Cheat Sheets](https://www.typescriptlang.org/cheatsheets)
+
+# CSS
 - [paddingとmarginの違いをできる限り難しい言葉を使わず説明してみた](https://webliker.info/50549/)
   - marginはbox外側余白
   - paddingはbox内側余白
 
+# Next
+
+- [大幅にリニューアルされた Next.js のチュートリアルをどこよりも早く全編和訳しました](https://qiita.com/thesugar/items/01896c1faa8241e6b1bc)
+- 
 # Other
 
 - [Marp](https://zenn.dev/gakin/articles/set_up_marp_on_github_actions)
