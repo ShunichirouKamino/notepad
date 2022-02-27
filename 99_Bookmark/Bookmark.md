@@ -97,6 +97,12 @@
   - asserts 機能も標準となるため、テストも簡単。
 - [Reactベストプラクティスの宝庫！「bulletproof-react」が勉強になりすぎる件](https://zenn.dev/meijin/articles/bulletproof-react-is-best-architecture)
 
+# Next
+
+- [サーバー側のレンダリング](https://formidable.com/open-source/urql/docs/advanced/server-side-rendering/)
+  - urqlを用いたGraphQLのフェッチについて、SSRでの実装
+
+
 # TypeScript
 - [TypeScript Cheat Sheets](https://www.typescriptlang.org/cheatsheets)
 
