@@ -96,6 +96,11 @@
   - TypeScript とも相性がいい。
   - asserts 機能も標準となるため、テストも簡単。
 - [Reactベストプラクティスの宝庫！「bulletproof-react」が勉強になりすぎる件](https://zenn.dev/meijin/articles/bulletproof-react-is-best-architecture)
+- [React RouterのHooks API ４つの機能を紹介！](https://ajike.github.io/react-router-dom_hooks/#usehistory)
+  - React RouterのHooks
+  - 主にuseHistoryによるpush()遷移、useRouteMatchによるパス条件一致分岐で使う
+  - useLocationやuseParamsによるパス名称、パスパラメータの取得も可能
+  - useHistryはv6で名称が変更されている[https://dev.classmethod.jp/articles/react-router-5to6/#toc-6](https://dev.classmethod.jp/articles/react-router-5to6/#toc-6)
 
 # Next
 
