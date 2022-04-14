@@ -101,11 +101,14 @@
   - 主にuseHistoryによるpush()遷移、useRouteMatchによるパス条件一致分岐で使う
   - useLocationやuseParamsによるパス名称、パスパラメータの取得も可能
   - useHistryはv6で名称が変更されている[https://dev.classmethod.jp/articles/react-router-5to6/#toc-6](https://dev.classmethod.jp/articles/react-router-5to6/#toc-6)
+- [別ドメインへの302 redirectを返すAPIを呼び出すとCORSエラー](https://rinoguchi.net/2019/05/302-redirect-cors.html)
+  - redirect時にCORSエラーが発生する。
 
 # Next
 
 - [サーバー側のレンダリング](https://formidable.com/open-source/urql/docs/advanced/server-side-rendering/)
   - urqlを用いたGraphQLのフェッチについて、SSRでの実装
+- [大幅にリニューアルされた Next.js のチュートリアルをどこよりも早く全編和訳しました](https://qiita.com/thesugar/items/01896c1faa8241e6b1bc)
 
 
 # TypeScript
@@ -116,10 +119,6 @@
   - marginはbox外側余白
   - paddingはbox内側余白
 
-# Next
-
-- [大幅にリニューアルされた Next.js のチュートリアルをどこよりも早く全編和訳しました](https://qiita.com/thesugar/items/01896c1faa8241e6b1bc)
-- 
 # Other
 
 - [Marp](https://zenn.dev/gakin/articles/set_up_marp_on_github_actions)
