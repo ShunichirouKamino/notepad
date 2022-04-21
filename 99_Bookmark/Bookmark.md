@@ -69,7 +69,7 @@
 
 # Rust
 - [RustでGraphQLサーバの実装を試してみる](https://zenn.dev/mkazutaka/articles/9b9228da5a741a)
-- 
+- [新しいRustプログラマーのために学ぶための9つの不可欠な機能](https://kerkour.com/indispensable-rust-features-to-learn/)
 
 # CI/CD
 
@@ -79,7 +79,7 @@
     - set-output が属するブロックには、必ず任意の id 要素として、`id: ANY`を指定
     - 利用する際は、`${{ steps.ANY.outputs.NAME }}`にて`VALUE`を取り出すことが可能
 
-# フロントエンド
+# React
 
 - [React の新しい状態管理ライブラリ「Recoil」とは？ Redux との違いを解説](https://ics.media/entry/210224/)
 - [【LINE 証券 FrontEnd】Recoil を使って安全快適な状態管理を手に入れた話](https://engineering.linecorp.com/ja/blog/line-sec-frontend-using-recoil-to-get-a-safe-and-comfortable-state-management/)
@@ -96,7 +96,28 @@
   - TypeScript とも相性がいい。
   - asserts 機能も標準となるため、テストも簡単。
 - [Reactベストプラクティスの宝庫！「bulletproof-react」が勉強になりすぎる件](https://zenn.dev/meijin/articles/bulletproof-react-is-best-architecture)
+- [React RouterのHooks API ４つの機能を紹介！](https://ajike.github.io/react-router-dom_hooks/#usehistory)
+  - React RouterのHooks
+  - 主にuseHistoryによるpush()遷移、useRouteMatchによるパス条件一致分岐で使う
+  - useLocationやuseParamsによるパス名称、パスパラメータの取得も可能
+  - useHistryはv6で名称が変更されている[https://dev.classmethod.jp/articles/react-router-5to6/#toc-6](https://dev.classmethod.jp/articles/react-router-5to6/#toc-6)
+- [別ドメインへの302 redirectを返すAPIを呼び出すとCORSエラー](https://rinoguchi.net/2019/05/302-redirect-cors.html)
+  - redirect時にCORSエラーが発生する。
+
+# Next
+
+- [サーバー側のレンダリング](https://formidable.com/open-source/urql/docs/advanced/server-side-rendering/)
+  - urqlを用いたGraphQLのフェッチについて、SSRでの実装
+- [大幅にリニューアルされた Next.js のチュートリアルをどこよりも早く全編和訳しました](https://qiita.com/thesugar/items/01896c1faa8241e6b1bc)
+
+
+# TypeScript
 - [TypeScript Cheat Sheets](https://www.typescriptlang.org/cheatsheets)
+
+# CSS
+- [paddingとmarginの違いをできる限り難しい言葉を使わず説明してみた](https://webliker.info/50549/)
+  - marginはbox外側余白
+  - paddingはbox内側余白
 
 # Other
 
@@ -116,3 +137,4 @@
 - [icooon-mono](https://icooon-mono.com/tag/%E5%8B%89%E5%BC%B7%E4%BC%9A/)
 - [freepik](https://jp.freepik.com/free-icon/jar-file-format_741926.htm)
 - [【エンジニア必見】チートシートまとめ(2022年最新)](https://sbucks-blog.com/program/tool/cheatsheet/02-1/)
+- [ドット絵ダウンロードサイト](https://dotown.maeda-design-room.net/)
