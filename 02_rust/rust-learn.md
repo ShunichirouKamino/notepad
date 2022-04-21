@@ -400,6 +400,23 @@ let world = &message[6..11]; // world
 
 - [トレイト](https://doc.rust-jp.rs/book-ja/ch10-02-traits.html)（共通の振る舞いを定義する、他の言語でいうインターフェースのようなもの）により、継承先で共通して利用される標準的な実装を提供できます。ここでいう継承元とは struct を指し、変数しか持てない struct に共通のふるまいを付与することが可能です。
 
+- トレイト境界（bounds）とは、ジェネリック型に対して、「このトレイトを実装していなければいけない」という制約を課すものです。
+
+```rust
+// TはDebugを実装している必要が有る
+fn my_fn<T: std::fmt::Debug>(val: T)  {
+    println!("{:?}", val); // Debugを使用できる
+}
+
+// TはDebugを実装している必要が有る
+fn my_fn<T>(val: T) -> ()
+where
+    T: std::fmt::Debug,
+{
+    println!("{:?}", val); // Debugを使用できる
+}
+```
+
 - enum と struct を用いて、直和型を実現することができます。
 
 ```rust
