@@ -417,6 +417,14 @@ where
 }
 ```
 
+- static は、`'static`ライフタイムと、`'static`ライフタイム境界の 2 種類の使用方法が有ります。`'static`ライフタイムは、いわゆるグローバルな変数となります。`'static`ライフタイム境界については、[こちら](https://laysakura.github.io/2020/05/21/rust-static-lifetime-and-static-bounds/)を参照。
+
+**`'static`ライフタイムは、プログラム起動中は常に有効な値への参照となります。**
+
+```rust
+let x: &'static str = "Hello, world.";
+```
+
 - enum と struct を用いて、直和型を実現することができます。
 
 ```rust
