@@ -1,0 +1,145 @@
+# JVM メモリ使用調査
+
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+- [JVM メモリ使用調査](#jvm-メモリ使用調査)
+  - [課題](#課題)
+  - [アプリで考えられる原因](#アプリで考えられる原因)
+  - [現行 JVM 設定](#現行-jvm-設定)
+    - [起動オプション](#起動オプション)
+    - [その他指定できるオプション](#その他指定できるオプション)
+    - [GC アルゴリズム](#gc-アルゴリズム)
+    - [その他参考](#その他参考)
+  - [調査方法](#調査方法)
+    - [利用ツール](#利用ツール)
+  - [調査](#調査)
+    - [ローカルで実行した場合](#ローカルで実行した場合)
+    - [Docker コンテナ内で実行した場合](#docker-コンテナ内で実行した場合)
+  - [辞書](#辞書)
+    - [ヒープ領域についての詳細](#ヒープ領域についての詳細)
+    - [GC の動き](#gc-の動き)
+
+<!-- /code_chunk_output -->
+
+## 課題
+
+コンテナ上で動作する Java アプリケーションのスケールインテストにおいて、スケールインの閾値（メモリ使用率 40 パーセント）を下回らずに、メモリ使用率が収束してしまう。
+
+## アプリで考えられる原因
+
+基本的には、本番とローカル開発時で利用する環境の差異から考える。
+
+- GC の本番とのアルゴリズムの差異
+- 起動 Docker コンテナサイズの差異
+
+## 現行 JVM 設定
+
+### 起動オプション
+
+- Xmx2048m
+  - ヒープの最大サイズを指定
+  - デフォルトは使用可能メモリの半分（最小 16MB, 最大 512MB）
+
+### その他指定できるオプション
+
+- Xms
+  - ヒープの初期サイズ
+
+### GC アルゴリズム
+
+```sh
+$ java -XX:+PrintFlagsFinal -version | egrep "Use.*GC "
+     bool UseAdaptiveSizePolicyWithSystemGC        = false                                     {product} {default}
+     bool UseConcMarkSweepGC                       = false                                     {product} {default}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseMaximumCompactionOnSystemGC           = true                                      {product} {default}
+     bool UseParallelGC                            = false                                     {product} {default}
+     bool UseParallelOldGC                         = false                                     {product} {default}
+     bool UseSerialGC                              = false                                     {product} {default}
+     bool UseShenandoahGC                          = false                                     {product} {default}
+openjdk version "11.0.9.1" 2020-11-04
+OpenJDK Runtime Environment AdoptOpenJDK (build 11.0.9.1+1)
+OpenJDK 64-Bit Server VM AdoptOpenJDK (build 11.0.9.1+1, mixed mode)
+
+```
+
+G1GC は、以下の特徴。
+
+- アプリケーションスレッドと並列で GC プロセスが走る、コンカレント型
+- ヒープサイズが 4G 以上ある場合に適している
+- Java6 では試験的実装、本格的に使うなら Java8 以降
+
+### その他参考
+
+- ヒープスレッドスタック及び Native ヒープと呼ばれる別のメモリもあるため、ここで指定したヒープのサイズが Java プロセスの利用メモリサイズとは限らない。
+
+- 余談として、GC アルゴリズムを指定している箇所は以下。server_processors（起動プロセスがサーバである、つまりサーバ並みのスペックである）のサイズ定義を 2 とした時に、アクティブなプロセッサのサイズが 2 以上であれば、高スペックマシーンとみなして UseG1GC を選定される。
+  - http://hg.openjdk.java.net/jdk/jdk11/file/1ddf9a99e4ad/src/hotspot/share/gc/shared/gcConfig.cpp#l103
+  - http://hg.openjdk.java.net/jdk/jdk11/file/1ddf9a99e4ad/src/hotspot/share/runtime/os.cpp#l1665
+
+## 調査方法
+
+### 利用ツール
+
+- jconsole
+  - `$ jps`により、JVM の実行プロセスを取得
+  - `$ jconsole`により、上記プロセスを取得
+- Locust
+  - コールする API は、hello を返すのみのシンプルな greet エンドポイントを 1 ～ 2 秒間隔の乱数で call
+
+```py
+from locust import HttpUser, between, task
+
+
+class QuickStartUser(HttpUser):
+    wait_time = between(1, 2)
+
+    @task
+    def hello(self):
+        self.client.get("/sandbox/greet")
+```
+
+上記定義にて、ひとまず 1 人から 100 人まで増やして実行した結果
+
+## 調査
+
+### ローカルで実行した場合
+
+`$ java -Xmx2048m -jar sandbox.jar`
+
+- Locust
+
+![img](./img/locust-1-100.png)
+
+![img](./img/locust-graph-1-100.png)
+
+- jconsole
+
+![img](./img/all-1-100.png)
+![img](./img/eden-1-100.png)
+![img](./img/survivor-1-100.png)
+![img](./img/old-1-100.png)
+
+### Docker コンテナ内で実行した場合
+
+## 辞書
+
+### ヒープ領域についての詳細
+
+- Old
+  - Old 領域は、長期間使用されたオブジェクトが格納される
+- Young-Eden
+  - Young 領域の Eden は、生成されたばかりのオブジェクトが格納される。
+- Young-Survivor
+  - Young 領域の Survivor は、ある程度の間使用されているオブジェクトが格納される。
+
+### GC の動き
+
+- 新規オブジェクトはまず、Eden に格納される。
+- Eden がいっぱいになると、Copy GC が発生する。
+  - Copy GC では、仕様厨のオブジェクトを Eden から Survivor に移動させる。
+  - Eden 及び Survivor 領域で使用済みと判断されたオブジェクトは、破棄される。
+- 一定回数の Copy GC でも破棄されなかった Eden 及び Survivor のオブジェクトは、Old 領域に移動する。
+- Old 領域がいっぱいになると、Full GC が発生する。
