@@ -20,11 +20,13 @@
       - [jconsole](#jconsole)
     - [Docker コンテナ内で実行した場合](#docker-コンテナ内で実行した場合)
       - [Dockerfile に JMX 接続する設定](#dockerfile-に-jmx-接続する設定)
+      - [Locust](#locust-1)
+      - [jconsole](#jconsole-1)
   - [辞書, TIPS](#辞書-tips)
     - [ヒープ領域についての詳細](#ヒープ領域についての詳細)
     - [JVM でのデフォルト値](#jvm-でのデフォルト値)
     - [GC の動き](#gc-の動き)
-    - [jconsole](#jconsole-1)
+    - [jconsole](#jconsole-2)
 
 <!-- /code_chunk_output -->
 
@@ -136,10 +138,14 @@ $ locust -f locustfile.py
 
 #### jconsole
 
-![img](./img/all-1-100.png)
-![img](./img/eden-1-100.png)
-![img](./img/survivor-1-100.png)
-![img](./img/old-1-100.png)
+- 全て
+  ![img](./img/all-1-100.png)
+- eden
+  ![img](./img/eden-1-100.png)
+- survivor
+  ![img](./img/survivor-1-100.png)
+- old
+  ![img](./img/old-1-100.png)
 
 - eden 領域は定期的な Copy GC が実行されている
 - old 領域が高止まりしており、Full GC は実行されていない
@@ -177,6 +183,23 @@ EXPOSE 5000
 
   - `$ docker build -f ./docker-sandbox/Dockerfile_Sandbox ./ -t sandbox`
   - `$ docker run --rm --memory=1g -p 9999:9999 --name=sandbox sandbox`
+
+#### Locust
+
+![img](./img/locust-docker-1-100.png)
+
+![img](./img/locust-graph-docker-1-100.png)
+
+#### jconsole
+
+- 全て
+  ![img](./img/all-docker-1-100.png)
+- eden
+  ![img](./img/eden-docker-1-100.png)
+- survivor
+  ![img](./img/survivor-docker-1-100.png)
+- tenured
+  ![img](./img/old-docker-1-100.png)
 
 ## 辞書, TIPS
 
