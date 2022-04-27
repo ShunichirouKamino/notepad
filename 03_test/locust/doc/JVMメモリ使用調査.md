@@ -19,6 +19,7 @@
     - [Docker コンテナ内で実行した場合](#docker-コンテナ内で実行した場合)
   - [辞書](#辞書)
     - [ヒープ領域についての詳細](#ヒープ領域についての詳細)
+    - [JVM でのデフォルト値](#jvm-でのデフォルト値)
     - [GC の動き](#gc-の動き)
 
 <!-- /code_chunk_output -->
@@ -122,6 +123,9 @@ class QuickStartUser(HttpUser):
 ![img](./img/survivor-1-100.png)
 ![img](./img/old-1-100.png)
 
+- eden 領域は定期的な Copy GC が実行されている
+- old 領域が高止まりしており、Full GC は実行されていない
+
 ### Docker コンテナ内で実行した場合
 
 ## 辞書
@@ -134,6 +138,12 @@ class QuickStartUser(HttpUser):
   - Young 領域の Eden は、生成されたばかりのオブジェクトが格納される。
 - Young-Survivor
   - Young 領域の Survivor は、ある程度の間使用されているオブジェクトが格納される。
+
+### JVM でのデフォルト値
+
+NewRatio オプションにて Old と Young のサイズ比率を指定可能。
+NewRatio を 2 とすると、`Young : Old = 1 : 2`のサイズ比となる。
+デフォルト値は 2。
 
 ### GC の動き
 
