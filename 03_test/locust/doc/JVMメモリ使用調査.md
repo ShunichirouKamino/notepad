@@ -16,11 +16,15 @@
     - [利用ツール](#利用ツール)
   - [調査](#調査)
     - [ローカルで実行した場合](#ローカルで実行した場合)
+      - [Locust](#locust)
+      - [jconsole](#jconsole)
     - [Docker コンテナ内で実行した場合](#docker-コンテナ内で実行した場合)
-  - [辞書](#辞書)
+      - [Dockerfile に JMX 接続する設定](#dockerfile-に-jmx-接続する設定)
+  - [辞書, TIPS](#辞書-tips)
     - [ヒープ領域についての詳細](#ヒープ領域についての詳細)
     - [JVM でのデフォルト値](#jvm-でのデフォルト値)
     - [GC の動き](#gc-の動き)
+    - [jconsole](#jconsole-1)
 
 <!-- /code_chunk_output -->
 
@@ -102,21 +106,35 @@ class QuickStartUser(HttpUser):
         self.client.get("/sandbox/greet")
 ```
 
-上記定義にて、ひとまず 1 人から 100 人まで増やして実行した結果
+- 起動コマンド
+
+```sh
+$ locust -f locustfile.py
+```
+
+上記定義にて、 1 人から 100 人まで増やして実行する。
+
+- Number of users
+  - 100
+- Spawn rate
+  - 1
 
 ## 調査
 
 ### ローカルで実行した場合
 
-`$ java -Xmx2048m -jar sandbox.jar`
+- java アプリケーションの起動
+  - `$ java -Xmx2048m -jar sandbox.jar`
+- jconsole の起動
+  - `$ jconsole`
 
-- Locust
+#### Locust
 
 ![img](./img/locust-1-100.png)
 
 ![img](./img/locust-graph-1-100.png)
 
-- jconsole
+#### jconsole
 
 ![img](./img/all-1-100.png)
 ![img](./img/eden-1-100.png)
@@ -128,7 +146,39 @@ class QuickStartUser(HttpUser):
 
 ### Docker コンテナ内で実行した場合
 
-## 辞書
+本番環境に合わせるサイズで実行する。
+
+- CPU
+  - 0.5vCPU
+- memory
+  - 1GB
+
+#### Dockerfile に JMX 接続する設定
+
+既存の java アプリケーションが起動する Docker ファイルに、以下設定を追加する。
+
+- jmxremote の接続設定
+  - 5000 ポートで接続
+  - 対象 host をローカルホストに
+  - ssl, 認証を不要とする
+
+```Dockerfile
+ENV JAVA_TOOL_OPTIONS "-Dcom.sun.management.jmxremote.ssl=false \
+ -Dcom.sun.management.jmxremote.authenticate=false \
+ -Dcom.sun.management.jmxremote.port=5000 \
+ -Dcom.sun.management.jmxremote.rmi.port=5000 \
+ -Dcom.sun.management.jmxremote.host=0.0.0.0 \
+ -Djava.rmi.server.hostname=0.0.0.0"
+
+EXPOSE 5000
+```
+
+- java アプリケーションの起動
+
+  - `$ docker build -f ./docker-sandbox/Dockerfile_Sandbox ./ -t sandbox`
+  - `$ docker run --rm --memory=1g -p 9999:9999 --name=sandbox sandbox`
+
+## 辞書, TIPS
 
 ### ヒープ領域についての詳細
 
@@ -153,3 +203,7 @@ NewRatio を 2 とすると、`Young : Old = 1 : 2`のサイズ比となる。
   - Eden 及び Survivor 領域で使用済みと判断されたオブジェクトは、破棄される。
 - 一定回数の Copy GC でも破棄されなかった Eden 及び Survivor のオブジェクトは、Old 領域に移動する。
 - Old 領域がいっぱいになると、Full GC が発生する。
+
+### jconsole
+
+jconsole は、JMX（Java Management Extensions）仕様に準拠した監視ツール。JMX 単品でも、JVM のヒープや GC の情報は取得できるが、それをグラフィカルに表示するためのツールが jconsole。jconsole は、jdk に標準で搭載されている。
