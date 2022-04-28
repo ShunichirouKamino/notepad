@@ -22,6 +22,8 @@
       - [Dockerfile に JMX 接続する設定](#dockerfile-に-jmx-接続する設定)
       - [Locust](#locust-1)
       - [jconsole](#jconsole-1)
+    - [メモリサイズと JVM 起動ヒープサイズを変更する](#メモリサイズと-jvm-起動ヒープサイズを変更する)
+      - [Locust](#locust-2)
   - [辞書, TIPS](#辞書-tips)
     - [ヒープ領域についての詳細](#ヒープ領域についての詳細)
     - [JVM でのデフォルト値](#jvm-でのデフォルト値)
@@ -202,6 +204,31 @@ EXPOSE 5000
   ![img](./img/old-docker-1-100.png)
 
 メモリ 1g で動作させた場合に、ローカルで動作した際と同様に tenured(old)GC がクリアされる FullGC が全く発生せず、メモリの使用量が常に上がり続けることが分かった。
+
+### メモリサイズと JVM 起動ヒープサイズを変更する
+
+Dockerfile を修正し、JVM 起動ヒープサイズを変更する。
+起動方法はこれまでと同じ。
+
+```Dockerfile
+ENTRYPOINT  ["java", "-Xmx512m", "-jar",  "sandbox-all.jar"]
+```
+
+#### Locust
+
+![img](./img/locust-1-10000-graph.png)
+
+- 利用ユーザが 1000 人を超えたあたりから FAILURES が怪しい。
+
+![img](./img/locust-1-10000-graph-2.png)
+
+- 10 時 40 分あたりで FAILURES が 25 パーセントを超え、ここで一旦テスト終了。この時点のメモリ使用量をいかに記す。
+  - FullGC は発生している（合わせて FAILURES も乱れている）
+  - eden が急上昇している。これは FullGC によるもの。
+
+![img](./img/old-1-10000.png)
+![img](./img/eden-1-10000.png)
+![img](./img/all-1-10000.png)
 
 ## 辞書, TIPS
 
