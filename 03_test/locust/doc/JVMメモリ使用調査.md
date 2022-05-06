@@ -24,11 +24,15 @@
       - [jconsole](#jconsole-1)
     - [メモリサイズと JVM 起動ヒープサイズを変更する](#メモリサイズと-jvm-起動ヒープサイズを変更する)
       - [Locust](#locust-2)
+      - [jconsole](#jconsole-2)
+    - [FAILUERES を無視し、Tenured 領域の FullGC が発生させる](#failueres-を無視し-tenured-領域の-fullgc-が発生させる)
+      - [Locust](#locust-3)
+      - [jconsole](#jconsole-3)
   - [辞書, TIPS](#辞書-tips)
     - [ヒープ領域についての詳細](#ヒープ領域についての詳細)
     - [JVM でのデフォルト値](#jvm-でのデフォルト値)
     - [GC の動き](#gc-の動き)
-    - [jconsole](#jconsole-2)
+    - [jconsole](#jconsole-4)
 
 <!-- /code_chunk_output -->
 
@@ -214,6 +218,8 @@ Dockerfile を修正し、JVM 起動ヒープサイズを変更する。
 ENTRYPOINT  ["java", "-Xmx512m", "-jar",  "sandbox-all.jar"]
 ```
 
+- `$ docker run --rm --memory=1g -p 9999:9999 --name=sandbox sandbox`
+
 #### Locust
 
 ![img](./img/locust-1-10000-graph.png)
@@ -226,9 +232,34 @@ ENTRYPOINT  ["java", "-Xmx512m", "-jar",  "sandbox-all.jar"]
   - FullGC は発生している（合わせて FAILURES も乱れている）
   - eden が急上昇している。これは FullGC によるもの。
 
-![img](./img/old-1-10000.png)
-![img](./img/eden-1-10000.png)
-![img](./img/all-1-10000.png)
+#### jconsole
+
+- tenured
+  ![img](./img/old-1-10000.png)
+- eden
+  ![img](./img/eden-1-10000.png)
+- all
+  ![img](./img/all-1-10000.png)
+
+### FAILUERES を無視し、Tenured 領域の FullGC が発生させる
+
+- JVM の Max ヒープサイズを 512MB
+- コンテナのメモリサイズを 1GB
+
+#### Locust
+
+![img](./img/locust-1-10000-fullgc.png)
+
+#### jconsole
+
+- tenured
+  ![img](./img/old-1-10000-fullGC.png)
+- eden
+  ![img](./img/eden-1-10000-fullGC.png)
+- all
+  ![img](./img/all-1-10000-fullGC.png)
+
+40MB を上限として、FullGC を繰り返している。
 
 ## 辞書, TIPS
 
