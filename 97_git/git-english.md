@@ -14,6 +14,8 @@
   - According "hogehoge" convention, ~
 - ほめるとき
   - Yeah, good practice with ~~ 👍
+- あと少しだけ直してほしい時
+  - Overall is LGTM! Just a few requests...
 
 # Abbreviation
 - 質疑
