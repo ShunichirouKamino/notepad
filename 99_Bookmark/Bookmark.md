@@ -103,6 +103,7 @@
   - useHistryはv6で名称が変更されている[https://dev.classmethod.jp/articles/react-router-5to6/#toc-6](https://dev.classmethod.jp/articles/react-router-5to6/#toc-6)
 - [別ドメインへの302 redirectを返すAPIを呼び出すとCORSエラー](https://rinoguchi.net/2019/05/302-redirect-cors.html)
   - redirect時にCORSエラーが発生する。
+- [Reactでクラスコンポーネントより関数コンポーネントを使うべき理由5選](https://tyotto-good.com/blog/reaseons-to-use-function-component)
 
 # Next
 
