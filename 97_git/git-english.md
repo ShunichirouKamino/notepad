@@ -16,6 +16,8 @@
   - Yeah, good practice with ~~ 👍
 - あと少しだけ直してほしい時
   - Overall is LGTM! Just a few requests...
+- 問題無いことを伝える
+  - Understood. Go ahead please! 
 
 # Abbreviation
 - 質疑
