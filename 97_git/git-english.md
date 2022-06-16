@@ -26,3 +26,5 @@
   - [nits]
 - 自分ならこうする
   - [IMO], [IMHO]
+  - in my humble opinion
+  - in my opinion
