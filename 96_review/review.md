@@ -15,5 +15,5 @@
 - 依存関係制御が有る場合はStep Functions
 - [AWS Step Functions が AWS SDK 統合で 200 を超える AWS のサービスのサポートを追加](https://aws.amazon.com/jp/about-aws/whats-new/2021/09/aws-step-functions-200-aws-sdk-integration/)
   - Lambdaを介して各AWSサービスを呼び出していた手間が不要になる
-- [アップデート]Step Functions Workflow Studioがリリースされて、ワークフロー作成が簡単になりました](https://dev.classmethod.jp/articles/stepfunctions-workflow-designer/)
+- [Step Functions Workflow Studioがリリースされて、ワークフロー作成が簡単になりました](https://dev.classmethod.jp/articles/stepfunctions-workflow-designer/)
   - GUIによるワークフロー作成
