@@ -8,6 +8,8 @@
 
 ## リモートで削除されているブランチをローカルでも削除
 
+- そもそもfetchの時点で削除する
+  - `$ git fetch --prune`
 - dry-runにて対象を確認
   - `$ git remote prune origin --dry-run`
 - prune
