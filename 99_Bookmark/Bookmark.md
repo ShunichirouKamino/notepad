@@ -110,6 +110,8 @@
 - [別ドメインへの302 redirectを返すAPIを呼び出すとCORSエラー](https://rinoguchi.net/2019/05/302-redirect-cors.html)
   - redirect時にCORSエラーが発生する。
 - [Reactでクラスコンポーネントより関数コンポーネントを使うべき理由5選](https://tyotto-good.com/blog/reaseons-to-use-function-component)
+- [useStateとuseReducerって実は大きな違いがある](https://zenn.dev/tis1116/articles/8b04672a0221bb#usestate-%E3%81%A7%E3%81%AE%E5%AE%9F%E8%A3%85)
+  - useReducerを使うことで、stateとactionの純粋関数を用いてstateを更新することができ、stateを更新する際の単体テストが書けることが最大のメリット
 
 # Next
 
