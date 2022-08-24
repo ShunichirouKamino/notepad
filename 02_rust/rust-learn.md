@@ -557,6 +557,22 @@ fn main() {
   - クレート内の特定の機能の有効／無効を切り替えることが可能です。
   - クレートによってはデフォルトでいくつかのフラグが有効になっていることも有るため、`default-features = false`を指定すると無効にできます。
 - モジュールのリリースは、`cargo run --release`で実行できます。windows 環境であれば、`target/release`フォルダ下に、`project_name.exe`バイナリファイルが生成されます。
+- `$ cargo search PACKAGE_NAME`にて、crate の最新バージョンの検索ができます。\*によるあいまい検索も可能です。
+
+```sh
+PS D:\workspacec> cargo search actix-web*
+    Blocking waiting for file lock on package cache
+actix-web-4-validator = "3.2.0"             # Validation mechanism for actix-web
+sse-actix-web = "0.8.1"                     # SSE for actix-web
+ws-actix-web = "0.2.0"                      # Web sockets for actix-web
+actix-web-tonic = "1.0.0"                   # actix-web and tonic concurrent runner
+tracing-actix-web = "0.6.0"                 # Structured logging middleware for actix-web.
+actix-web-validator = "4.0.0"               # Validation mechanism for actix-web
+actix-web-requestid = "2.0.0-beta.1"        # Request ID middleware for actix-web
+actix-web-middleware-requestid = "3.0.1"    # Request ID middleware for the actix-web framework v1.0+
+actix-web-flash-messages = "0.4.1"          # Flash messages for actix-web applications.
+actix-xml = "0.2.0"                         # XML extractor for actix-web
+```
 
 **Cargo.toml**
 
