@@ -5,3 +5,12 @@
 - `$ git push -f origin main`
 
 ※branch 名称が master の場合、`$ git branch -M main`にて変更しておく
+
+## リモートで削除されているブランチをローカルでも削除
+
+- そもそもfetchの時点で削除する
+  - `$ git fetch --prune`
+- dry-runにて対象を確認
+  - `$ git remote prune origin --dry-run`
+- prune
+  - `$ git remote prune origin`

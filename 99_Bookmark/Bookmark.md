@@ -38,6 +38,12 @@
   - 別の Pod からこの Service へアクセスするために、クラスタ内部権威 DNS に A レコードが追記される。つまり、ホスト名でアクセスが可能となる。
   - ヘッドレスサービスは、DNS の A レコードに登録される IP アドレスが Pod の IP アドレスそのものになるサービス提供形態。通常は Service に IP アドレスと Pod のホスト名が A レコードに登録されるため、Service の IP アドレスによってロードバランシングされる。
   - ヘッドレスサービスは、StatefulSet のように永続的なデータを保持したロードバランシングされたくないリソースへのアクセスに利用される。
+- [autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler)
+  - インフラレベルのオーケストレータ
+  - k8sのエコシステムなので、クラウド依存しない
+- [Karpenter](https://aws.amazon.com/jp/blogs/news/introducing-karpenter-an-open-source-high-performance-kubernetes-cluster-autoscaler/)
+  - ここに起動してねを管理しなくてもよく、アプリがCPU欲しい場合に勝手に増加してもらえる
+  - EKEで利用できるオープンソース
 
 # DDD
 - [「実践ドメイン駆動設計」を読んだので、実際にDDDで設計して作ってみた！](https://qiita.com/APPLE4869/items/d210ddc2cb1bfeea9338)
@@ -103,6 +109,9 @@
   - useHistryはv6で名称が変更されている[https://dev.classmethod.jp/articles/react-router-5to6/#toc-6](https://dev.classmethod.jp/articles/react-router-5to6/#toc-6)
 - [別ドメインへの302 redirectを返すAPIを呼び出すとCORSエラー](https://rinoguchi.net/2019/05/302-redirect-cors.html)
   - redirect時にCORSエラーが発生する。
+- [Reactでクラスコンポーネントより関数コンポーネントを使うべき理由5選](https://tyotto-good.com/blog/reaseons-to-use-function-component)
+- [useStateとuseReducerって実は大きな違いがある](https://zenn.dev/tis1116/articles/8b04672a0221bb#usestate-%E3%81%A7%E3%81%AE%E5%AE%9F%E8%A3%85)
+  - useReducerを使うことで、stateとactionの純粋関数を用いてstateを更新することができ、stateを更新する際の単体テストが書けることが最大のメリット
 
 # Next
 
