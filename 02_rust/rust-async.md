@@ -1,8 +1,76 @@
+<!-- vscode-markdown-toc -->
+* 1. [事前知識](#)
+	* 1.1. [Future](#Future)
+	* 1.2. [async](#async)
+	* 1.3. [await](#await)
+* 2. [利用クレートfutures::future](#futures::future)
+	* 2.1. [join](#join)
+* 3. [tonicとactix_webの並列ランナー実装](#tonicactix_web)
+
+<!-- vscode-markdown-toc-config
+	numbering=true
+	autoSave=true
+	/vscode-markdown-toc-config -->
+<!-- /vscode-markdown-toc -->1
+
 # Rust 非同期整理
 
-## 事前知識
+##  1. <a name=''></a>事前知識
 
-### async
+
+###  1.1. <a name='Future'></a>Future
+
+- `Future`traitは、非同期な関数を表します。JavaScriptの`Promise`と似ていますが、処理の成功／失敗を内包しているわけではありません。
+- `Future`traitをimplすることで、自分で非同期なオブジェクトを実装することができます。
+- `async`シンタックスは、任意の関数を`Future`でラップする、`Future`のシンタックスシュガーです。
+
+```rust
+pub trait Future {
+    // Futureの返り値オブジェクト
+    type Output;
+
+    // Futureが実行可能であるかどうかの判定を行うメソッド
+    fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
+}
+
+pub enum Poll<T> {
+    Ready(T),
+    Pending,
+}
+```
+
+- （参考）値を返すだけのFutureを自前で実装
+
+```rust
+use std::future::Future;
+use std::pin::Pin;
+use std::task::{Context, Poll};
+
+pub struct ReturnFuture<T>(Option<T>);
+
+impl<T> ReturnFuture<T> {
+    pub fn new(t: T) -> Self {
+        Self(Some(t))
+    }
+}
+
+impl<T> Future for ReturnFuture<T>
+where
+    T: Unpin,
+{
+    type Output = T;
+    fn poll(self: Pin<&mut Self>, _: &mut Context) -> Poll<Self::Output> {
+        Poll::Ready(
+            self.get_mut()
+                .0
+                .take()
+                .expect("A future should never be polled after it returns Ready"),
+        )
+    }
+}
+```
+
+###  1.2. <a name='async'></a>async
 
 - [Asynchronous Programming in Rust - async/.await Primer](https://rust-lang.github.io/async-book/01_getting_started/04_async_await_primer.html)
 
@@ -35,7 +103,7 @@ fn hello_world() -> impl std::future::Future<Output = ()> {
 }
 ```
 
-### await
+###  1.3. <a name='await'></a>await
 
 - `await` は、スレッドを並列実行可能状態にさせ、複数のスレッドを同時実行させることができます。
 - `await` を使わない以下の例では、`sing_song`の実行の後に直列で`dance`が実行されます。
@@ -84,60 +152,11 @@ fn main() {
 }
 ```
 
-### Future
 
-- `Future`は、非同期な関数を表します。JavaScriptの`Promise`と似ていますが、処理の成功／失敗を内包しているわけではありません。
-- 
 
-```rust
-pub trait Future {
-    // Futureの返り値オブジェクト
-    type Output;
+##  2. <a name='futures::future'></a>利用クレートfutures::future
 
-    // Futureが実行可能であるかどうかの判定を行うメソッド
-    fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
-}
-
-pub enum Poll<T> {
-    Ready(T),
-    Pending,
-}
-```
-
-- （参考）値を返すだけのFutureを自前で実装
-
-```rust
-use std::future::Future;
-use std::pin::Pin;
-use std::task::{Context, Poll};
-
-pub struct ReturnFuture<T>(Option<T>);
-
-impl<T> ReturnFuture<T> {
-    pub fn new(t: T) -> Self {
-        Self(Some(t))
-    }
-}
-
-impl<T> Future for ReturnFuture<T>
-where
-    T: Unpin,
-{
-    type Output = T;
-    fn poll(self: Pin<&mut Self>, _: &mut Context) -> Poll<Self::Output> {
-        Poll::Ready(
-            self.get_mut()
-                .0
-                .take()
-                .expect("A future should never be polled after it returns Ready"),
-        )
-    }
-}
-```
-
-## 利用クレートfutures::future
-
-### join
+###  2.1. <a name='join'></a>join
 
 - `join`関数は二つの`Future`を引数にとり、非同期実行可能な、つまり新たな`Future`を作ります。
 
@@ -155,7 +174,7 @@ asert_eq!(result.0, 1)
 ```
 
 - `join`関数は`Join`オブジェクトを構築します。
-- `Join`オブジェクトは、マクロによって`Future`をImplする形で作られています。
+- `Join`オブジェクトは、マクロによって`Future`traitをImplする形で作られています。
   - `join`にはjoin~join5があり、それぞれ与える`future`の数によって利用する`join`が異なります。各返却値である`Join`オブジェクトを冗長に実装しない目的で、マクロによる実装がされています。
 
 ```rust
@@ -189,11 +208,43 @@ impl<$($Fut: Future),*> Future for $Join<$($Fut),*> {
 }
 ```
 
+### abortable
+
+- `abortable`関数は、中断可能な`Future`を構築します。
+- `abortable`関数は、1つの`Future`を引数にとり、`Future`を`Abortable`オブジェクトに変換して返却します。
+  - `Abortable`オブジェクトは、中断可能な`Future`です。
+- `Abortable`オブジェクトは、`abortable`のもう一つの返り値である`abortHandle`によって、中断することが可能です。
+
+```rust
+use futures::future::{Abortable, Aborted};
+
+let (abortable_future, aborter) = futures::future::abortable(future);
+// abortableハンドラをabortさせる
+aborter.abort();
+// awaitで実行しても、既にabortしている
+assert_eq!(abotable_future.await, Err(Aborted))
+```
+
+- abortable関数では、`AbortHandle::new_pair()`により、ハンドラの登録に必要な`reg`変数が返却されます。
+- `Abortable::new(future, reg)`により、既存の`future`と`reg`を用いてオブジェクト化することで、`handle`に対して既存の`future`が登録され、`abortable`になります。
+
+```rust
+// https://doc.servo.org/src/futures_util/future/abortable.rs.html#1
+pub fn abortable<Fut>(future: Fut) -> (Abortable<Fut>, AbortHandle)
+where
+    Fut: Future,
+{
+    let (handle, reg) = AbortHandle::new_pair();
+    let abortable = assert_future::<Result<Fut::Output, Aborted>, _>(Abortable::new(future, reg));
+    (abortable, handle)
+}
+```
 
 
-## tonicとactix_webの並列ランナー実装
 
-### 
+##  3. <a name='tonicactix_web'></a>tonicとactix_webの並列ランナー実装
+
+### joinによるactix及びtonicそれぞれのfutureの並列実行
 - `futures::future`クレートの`join`により、`actix-web`の`future`と`tonic`の`future`を同時実行させます。
 
 ```rust
@@ -214,6 +265,7 @@ pub async fn async_main(
     let r_actix = actix_main(actix_future);
     let r_tokio = tokio_main(tonic_future);
 
+    // actix及びto
     let r = futures::future::join(r_actix, r_tokio).await;
     match r {
         (Ok(_), Ok(_)) => Ok(()),
