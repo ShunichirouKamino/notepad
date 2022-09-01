@@ -9,6 +9,9 @@
   - 2.2. [abortable](#abortable)
 - 3. [tonic と actix_web の並列ランナー実装](#tonicactix_web)
   - 3.1. [①`futures::future`クレートの`join`により、`actix-web`の`future`と`tonic`の`future`を同時実行させます。](#futures::futurejoinactix-webfuturetonicfuture)
+  - 3.2. [② 片方の future に対して SIGKILL の hook を実装し、abortable によるタスクキルを実現します。](#futureSIGKILLhookabortable)
+  - 3.3. [③`tokio`ランタイムを構築し、仮想的な`#[tokio_main]`による非同期実行関数を実装します。](#tokiotokio_main)
+- 4. [分からない](#-1)
 
 <!-- vscode-markdown-toc-config
 	numbering=true
@@ -279,7 +282,7 @@ pub async fn async_main(
 }
 ```
 
-### ② 片方の future に対して SIGKILL の hook を実装し、abortable によるタスクキルを実現します。
+### 3.2. <a name='futureSIGKILLhookabortable'></a>② 片方の future に対して SIGKILL の hook を実装し、abortable によるタスクキルを実現します。
 
 ```rust
 use futures::future::Future;
@@ -316,7 +319,7 @@ pub async fn abortable_future(
 }
 ```
 
-### ③`tokio`ランタイムを構築し、仮想的な`#[tokio_main]`による非同期実行関数を実装します。
+### 3.3. <a name='tokiotokio_main'></a>③`tokio`ランタイムを構築し、仮想的な`#[tokio_main]`による非同期実行関数を実装します。
 
 tokio ランタイムをマクロを用いず自前で実装する。
 
@@ -402,7 +405,7 @@ pub fn invoke(
 }
 ```
 
-## 分からない
+## 4. <a name='-1'></a>分からない
 
 - tokio ランタイムのスレッド数について
   - どの程度 tokio に与えればいいのか
