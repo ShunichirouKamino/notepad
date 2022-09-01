@@ -17,7 +17,20 @@
 	numbering=true
 	autoSave=true
 	/vscode-markdown-toc-config -->
-<!-- /vscode-markdown-toc -->1
+<!-- /vscode-markdown-toc --><!-- vscode-markdown-toc -->
+
+- 1. [事前知識](#)
+  - 1.1. [Future](#Future)
+  - 1.2. [async](#async)
+  - 1.3. [await](#await)
+- 2. [利用クレート futures::future](#futures::future)
+  - 2.1. [join](#join)
+  - 2.2. [abortable](#abortable)
+- 3. [tonic と actix_web の並列ランナー実装](#tonicactix_web)
+  - 3.1. [①`futures::future`クレートの`join`により、`actix-web`の`future`と`tonic`の`future`を同時実行させます。](#futures::futurejoinactix-webfuturetonicfuture)
+  - 3.2. [② 片方の future に対して SIGKILL の hook を実装し、abortable によるタスクキルを実現します。](#futureSIGKILLhookabortable)
+  - 3.3. [③`tokio`ランタイムを構築し、仮想的な`#[tokio_main]`による非同期実行関数を実装します。](#tokiotokio_main)
+- 4. [分からない](#-1)
 
 # Rust 非同期整理
 
