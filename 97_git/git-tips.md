@@ -14,3 +14,8 @@
   - `$ git remote prune origin --dry-run`
 - prune
   - `$ git remote prune origin`
+
+## APIコールしてIssueの取得
+- 全件取得する例
+
+curl -u ":username" -H "Accept: application/vnd.github+json" -H "Authorization: Bearer hogehoge" "https://api.github.com/repos/ORG/REPO/issues?state=all&per_page=100&page=1" | jq -r '["number","title","html_url","state"], (.[] | [.number,.title,.html_url,.state]) | @csv' > issues_all_page1.csv
