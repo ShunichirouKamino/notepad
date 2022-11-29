@@ -15,6 +15,13 @@
 - prune
   - `$ git remote prune origin`
 
+## リモートリポジトリを手元のブランチに取得
+
+- fetch
+  - `$ git fetch origin feature/hogehoge`
+- switch
+  - `$ git checkout feature/hogehoge`
+
 ## APIコールしてIssueの取得
 - 全件取得する例
 
