@@ -27,4 +27,21 @@
 
 `$ curl -u ":username" -H "Accept: application/vnd.github+json" -H "Authorization: Bearer hogehoge" "https://api.github.com/repos/ORG/REPO/issues?state=all&per_page=100&page=1" | jq -r '["number","title","html_url","state"], (.[] | [.number,.title,.html_url,.state]) | @csv' > issues_all_page1.csv`
 
+## 初期リポジトリ作成からの流れ
 
+- GUI上でリポジトリ作成
+- ローカルで以下手順
+  - $ git init
+  - $ git add .
+  - $ git commit -m 'first commit'
+  - $ git remote add origin 追加したいリポジトリ名
+  - $ git push -u origin main
+
+初期リポジトリでREADMEを追加していると、pullを促された後に以下エラー。
+
+```
+fatal: refusing to merge unrelated histories
+```
+
+- 以下コマンドで解消できる。これは、自分のコミットログとは関係ないコミットを取り込むオプション。
+  - `$ git merge --allow-unrelated-histories origin/main`
