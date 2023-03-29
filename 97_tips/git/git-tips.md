@@ -37,7 +37,17 @@
   - $ git remote add origin 追加したいリポジトリ名
   - $ git push -u origin main
 
-初期リポジトリでREADMEを追加していると、pullを促された後に以下エラー。
+※originが存在してしまうと、以下エラー。
+
+```
+error: remote origin already exists.
+```
+
+- 以下コマンドで解消できる。
+  - `$ git remote rm origin`
+
+※初期リポジトリでREADMEを追加していると、pullを促された後に以下エラー。
+
 
 ```
 fatal: refusing to merge unrelated histories
