@@ -34,7 +34,7 @@
   - $ git init
   - $ git add .
   - $ git commit -m 'first commit'
-  - $ git remote add origin 追加したいリポジトリ名
+  - $ git remote add origin https://追加したいリポジトリ名
   - $ git push -u origin main
 
 ※originが存在してしまうと、以下エラー。
