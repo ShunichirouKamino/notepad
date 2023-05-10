@@ -1,0 +1,2 @@
+- Global Config
+  - Ctrl Shift P -> settingを入力
