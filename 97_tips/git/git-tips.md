@@ -14,6 +14,17 @@
   - `$ git remote prune origin --dry-run`
 - prune
   - `$ git remote prune origin`
+ 
+## 手元のファイルが更新済みである場合
+以下エラーが出る。
+> Please move or remove them before you merge.
+
+- 作業ファイルをリセットしたい場合
+  - `$ git clean -fd'
+- 作業ファイルをリストアしたい場合
+  - `$ git restore filename`
+ 
+もしくはstash
 
 ## リモートリポジトリを手元のブランチに取得
 
